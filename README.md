@@ -9,7 +9,22 @@
 
 This project is a full-stack application that I decided to create to learn more in depth about React and Django. It's core concept is a website that lets its users to post and display images, basically what Instagram offers. 
 
+## How to run?
+You'll need one env file in the /server directory with following structure:
+```
+DATABASE_USER=your_db_username
+DATABASE_PASS=your_db_password
+```
 
+To start the server run:
+```
+python manage.py runserver
+```
+
+To start the client run:
+```
+npm start
+```
 
 ## Documentation
 
@@ -40,6 +55,6 @@ React, Django, Docker, SCSS
 
 ## To-do
 
-- [ ] Find a suitable way of creating documentation
+- [x] Find a suitable way of creating documentation
 - [ ] Set up the back-end with the REST framework
 - [ ] Create tests
