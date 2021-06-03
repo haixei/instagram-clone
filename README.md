@@ -48,7 +48,7 @@ _To be started._
 ## Tech stack
 
 ```
-React, Django, Docker, SCSS
+React, Django, Docker, SCSS, PostgreSQL
 ```
 
 
