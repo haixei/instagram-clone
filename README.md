@@ -41,6 +41,5 @@ React, Django, Docker, SCSS
 ## To-do
 
 - [ ] Find a suitable way of creating documentation
-
 - [ ] Set up the back-end with the REST framework
 - [ ] Create tests
