@@ -12,6 +12,7 @@ class User(models.Model):
             models.CharField(max_length=50, blank=True),
         )
     )
+    avatar = models.ImageField(upload_to='avatars')
 
 
 class Comment(models.Model):
@@ -20,10 +21,11 @@ class Comment(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+    likes = models.IntegerField(default=0)
 
 
 class PostedImage(models.Model):
-    imgURL = models.CharField(max_length=120)
     description = models.CharField(max_length=200)
     created = models.DateField()
-
+    likes = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='images')

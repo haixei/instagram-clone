@@ -3,18 +3,26 @@ from .models import User, Comment, PostedImage
 
 
 class UserSerializer(serializers.ModelSerializer):
+    avatar = serializers.ImageField(
+        max_length=None, use_url=True
+    )
+
     class Meta:
         model = User
-        fields = ('username', 'bio', 'created', 'following')
+        fields = ('username', 'bio', 'created', 'following', 'avatar')
 
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('content', 'author')
+        fields = ('content', 'author', 'likes')
 
 
 class PostedImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(
+        max_length=None, use_url=True
+    )
+
     class Meta:
         model = PostedImage
-        fields = ('imgURL', 'description', 'created')
+        fields = ('description', 'created', 'likes', 'image')

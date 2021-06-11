@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "react": "^17.0.2"
+    "vue-cli": "^2.9.6"
   }
 }
