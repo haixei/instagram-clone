@@ -48,7 +48,7 @@ _To be started._
 ## Tech stack
 
 ```
-React, Django, Docker, SCSS, PostgreSQL
+Vue, Django, Docker, SCSS, PostgreSQL
 ```
 
 
@@ -56,5 +56,5 @@ React, Django, Docker, SCSS, PostgreSQL
 ## To-do
 
 - [x] Find a suitable way of creating documentation
-- [ ] Set up the back-end with the REST framework
+- [x] Set up the back-end with the REST framework
 - [ ] Create tests
