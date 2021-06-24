@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  server:
+    image: server
+    build:
+      context: server
+      dockerfile: ./server/Dockerfile
+    ports:
+      - 8000:8000
+  client:
+    image: client
+    build:
+      context: client
+      dockerfile: ./client/Dockerfile
