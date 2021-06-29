@@ -5,11 +5,25 @@ services:
     image: server
     build:
       context: server
-      dockerfile: ./server/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - 8000:8000
+    env_file:
+      - ./.env
+    depends_on:
+      - "db"
   client:
     image: client
     build:
       context: client
-      dockerfile: ./client/Dockerfile
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+  db:
+    image: postgres:alpine
+    env_file: 
+      - ./.env 
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+volumes:
+  datapg:

@@ -11,6 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install pip requirements
 COPY requirements.txt .
+COPY wait-for-it.sh .
 RUN python -m pip install -r requirements.txt
 
 WORKDIR /app
@@ -23,4 +24,4 @@ USER appuser
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 # File wsgi.py was not found in subfolder: 'instagram-clone'. Please enter the Python path to wsgi file.
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "pythonPath.to.wsgi"]
+CMD ["./wait-for-it.sh", "-t", "10", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
