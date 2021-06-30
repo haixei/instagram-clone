@@ -1,60 +1,43 @@
+![In works](https://i.imgur.com/mkBGAdj.png)
+
+![Web Full-Stack](https://i.imgur.com/meB7aiP.png)
+
+# Instagram Clone
+
+This project is a full-stack application made with Django and Vue that imitates Instagram. It allows people to post messages and stories, follow users, write comments and "like" content. This repository contains all the code needed right with the instructions on how to use it as well as explanations for different parts of it.
 
 
-![In works](https://i.imgur.com/hRgn3WZ.png)
-![ML project](https://i.imgur.com/meB7aiP.png)
+
+## How to start?
+
+Starting the application is quite easy and all we need for this purpose is a Docker installed on your machine. The docker-compose file specifies everything about the start-up of the containers, if you miss anything, look there.
 
 
 
-# Way - Instagram clone
+**Step-by-step guide:**
 
-This project is a full-stack application that I decided to create to learn more in depth about React and Django. It's core concept is a website that lets its users to post and display images, basically what Instagram offers. 
+1. Create a .env file with the following contents
 
-## How to run?
-You'll need one env file in the /server directory with following structure:
+```js
+POSTGRES_PASSWORD=your_db_password
+POSTGRES_USER=your_db_username
+POSTGRES_DB=your_db_name
+DJANGO_SECRET=django_secret
 ```
-DATABASE_USER=your_db_username
-DATABASE_PASS=your_db_password
+
+2. Start the application using this command
+
+```
+docker-compose up -d
 ```
 
-To start the server run:
-```
-python manage.py runserver
-```
+3. If all images got build and launched correctly, you should be able to access the client on the port 8080 and the server on the port 8000
 
-To start the client run:
-```
-npm start
-```
+
 
 ## Documentation
 
-_To be started._
+Despite being quite compact, this project has some things that could be documented for the future users. At the moment the documentation includes the Docker implementation, deployment guide and overview of the architecture.
 
+The documentation files can be find [here.](./docs/docs.md)
 
-
-## Features
-
-- User database
-  - Log in
-  - Saving information about uploaded images
-- Images
-  - Image upload
-  - Discovering images on the feed (random fake users)
-- Following
-  - Follow/unfollow users
-
-
-
-## Tech stack
-
-```
-Vue, Django, Docker, SCSS, PostgreSQL
-```
-
-
-
-## To-do
-
-- [x] Find a suitable way of creating documentation
-- [x] Set up the back-end with the REST framework
-- [ ] Create tests
