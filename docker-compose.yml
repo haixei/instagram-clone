@@ -12,6 +12,8 @@ services:
       - ./.env
     depends_on:
       - "db"
+    volumes:
+      - ./server:/app
   client:
     image: client
     build:
@@ -19,6 +21,9 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8080:8080
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
   db:
     image: postgres:alpine
     env_file: 
