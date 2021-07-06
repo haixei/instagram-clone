@@ -8,9 +8,7 @@ class User(models.Model):
     bio = models.TextField()
     created = models.DateField()
     following = ArrayField(
-        ArrayField(
-            models.CharField(max_length=50, blank=True),
-        )
+        models.CharField(max_length=50, blank=True),
     )
     avatar = models.ImageField(upload_to='avatars', blank=True)
 
@@ -28,4 +26,21 @@ class PostedImage(models.Model):
     description = models.CharField(max_length=200)
     created = models.DateField()
     likes = models.IntegerField(default=0)
+    hashtags = ArrayField(
+            models.CharField(max_length=50, blank=True),
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True
+    )
     image = models.ImageField(upload_to='images', blank=True)
+
+
+class UserStory(models.Model):
+    created = models.DateField()
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    image = models.ImageField(upload_to='stories', blank=True)

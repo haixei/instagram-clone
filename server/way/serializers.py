@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Comment, PostedImage
+from .models import User, Comment, PostedImage, UserStory
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,4 +25,10 @@ class PostedImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PostedImage
-        fields = ('description', 'created', 'likes', 'image')
+        fields = ('description', 'created', 'likes', 'image', 'author', 'hashtags')
+
+
+class UserStorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserStory
+        fields = ('created', 'author', 'image')
