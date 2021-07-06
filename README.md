@@ -25,13 +25,39 @@ POSTGRES_DB=your_db_name
 DJANGO_SECRET=django_secret
 ```
 
-2. Start the application using this command
+2. Tell Docker to use your profile as the one running the process, this makes sure that your local permissions are working (writing files to folders for example)
+
+   ```dockerfile
+   services:
+     server:
+       (...)
+       user: "<your profile id>:<your profile id>"
+   ```
+
+3. Start the application using this command
 
 ```
 docker-compose up -d
 ```
 
-3. If all images got build and launched correctly, you should be able to access the client on the port 8080 and the server on the port 8000
+4. Now you have to migrate your database
+
++ Enter the database container terminal using this command
+
+  ```
+  docker-compose exec server bash
+  ```
+
++ Apply all initial changes to the database
+
+  ```python
+  python manage.py makemigrations
+  
+  # If no errors proceed with the migration
+  python manage.py migrate
+  ```
+
+5. If all images got build and launched correctly, you should be able to access the client on the port 8080 and the server on the port 8000, next time all you have to do is step 3, **happy coding!**
 
 
 
