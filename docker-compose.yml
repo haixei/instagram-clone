@@ -14,6 +14,7 @@ services:
       - "db"
     volumes:
       - ./server:/app
+    user: "1000:1000"
   client:
     image: client
     build:
@@ -24,11 +25,14 @@ services:
     volumes:
       - ./client:/usr/src/app
       - /usr/src/app/node_modules
+    user: "1000:1000"
   db:
     image: postgres:alpine
     env_file: 
       - ./.env 
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 volumes:
   datapg:
