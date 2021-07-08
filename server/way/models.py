@@ -2,15 +2,12 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 
-# Create the models
 class User(models.Model):
     username = models.CharField(max_length=50)
     bio = models.TextField()
     created = models.DateField()
-    following = ArrayField(
-        models.CharField(max_length=50, blank=True),
-    )
-    avatar = models.ImageField(upload_to='avatars', blank=True)
+    following = models.ManyToManyField('self', blank=True, related_name='followed_users', symmetrical=False)
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
 
 
 class Comment(models.Model):
@@ -19,22 +16,29 @@ class Comment(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, blank=True, related_name='liked_comments', symmetrical=False)
 
 
 class PostedImage(models.Model):
     description = models.CharField(max_length=200)
     created = models.DateField()
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, blank=True, related_name='liked_images', symmetrical=False)
     hashtags = ArrayField(
-            models.CharField(max_length=50, blank=True),
+            models.CharField(max_length=50),
+            null=True,
+            blank=True
     )
     author = models.ForeignKey(
         User,
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(upload_to='images', blank=True, null=True)
+    comments = models.ForeignKey(
+        Comment,
         on_delete=models.CASCADE,
+        blank=True,
         null=True
     )
-    image = models.ImageField(upload_to='images', blank=True)
 
 
 class UserStory(models.Model):
@@ -43,4 +47,4 @@ class UserStory(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    image = models.ImageField(upload_to='stories', blank=True)
+    image = models.ImageField(upload_to='stories', blank=True, null=True)

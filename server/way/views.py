@@ -10,6 +10,13 @@ class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+    # Get user by username
+    @action(detail=False, methods=['get'])
+    def get_user(self, request, username):
+        user = User.objects.get(username=username)
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
+
 
 class CommentView(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
@@ -21,23 +28,30 @@ class PostedImageView(viewsets.ModelViewSet):
     queryset = PostedImage.objects.all()
 
     @action(detail=False, methods=['get'])
-    def get_feed(self, request):
-        username = request.query_params['username']
-        followed = User.objects.get(username=username)
-        images = PostedImage.objects.filter(name__in=followed)
+    def get_feed(self, request, username):
+        print('test')
+        user = User.objects.get(username=username)
+        followed = user.following.values_list('username', flat=True)
+        images = PostedImage.objects.filter(author__username__in=followed)
+        serializer = self.serializer_class(images, many=True)
+        return Response(serializer.data)
 
-        return Response(images)
+
+    @action(detail=False, methods=['get'])
+    def get_feed_from_hashtag(self, request, hashtag):
+        images = PostedImage.objects.filter(hashtags__icontains=hashtag)
+        serializer = self.serializer_class(images, many=True)
+        return Response(serializer.data)
 
 
-class StoriesView(viewsets.ModelViewSet):
+class UserStoryView(viewsets.ModelViewSet):
     serializer_class = UserStorySerializer
     queryset = UserStory.objects.all()
 
     @action(detail=False, methods=['get'])
-    def get_active_stories(self, request):
-        username = request.query_params['username']
-        # Retrieve the names of followed accounts
-        followed = User.objects.get(username=username)
-        stories = UserStory.objects.filter(name__in=followed)
-
-        return Response(stories)
+    def get_active_stories(self, request, username):
+        user = User.objects.get(username=username)
+        followed = user.following.values_list('username', flat=True)
+        stories = UserStory.objects.filter(author__username__in=followed)
+        serializer = self.serializer_class(stories, many=True)
+        return Response(serializer.data)
