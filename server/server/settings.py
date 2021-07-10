@@ -133,11 +133,13 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:8080'
+     'http://localhost:8000'
 ]
 
+ALLOWED_HOSTS = ['server', '0.0.0.0']
+
 # Base url to serve media files
-MEDIA_URL = '/media/'
+MEDIA_URL = 'api/media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
