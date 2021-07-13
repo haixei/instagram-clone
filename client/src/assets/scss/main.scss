@@ -1,0 +1,50 @@
+// Misc. Variables
+$radius: 8px;
+$radius-button: 4px;
+
+// Palette
+$black: #161616;
+
+// Add fonts
+@font-face {
+    font-family: 'Swiss';
+    src: url('/assets/fonts/swiss.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SwissMed';
+    src: url('/assets/fonts/swiss-med.ttf') format('truetype');
+}
+
+// Global styles
+body{
+    background: linear-gradient(to right top, #ffcc3e, #FF6948, #5D25FC);
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    color: #141414;
+    font-family: "Swiss", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1{
+    font-family: "SwissMed", sans-serif;
+    font-weight: 600;
+}
+
+button{
+    font-family: "Swiss", sans-serif;
+    padding: 0px;
+    line-height: 1.6em;
+    padding-top: 0.3em;
+    cursor: pointer;
+}
+
+.insta-logo{
+    height: 34px;
+}
+
+span{
+    color: #8d8d8d;
+}
