@@ -23,7 +23,17 @@ One thing that could not be so obvious for people who don't have any experience 
 
 ## Client side architecture
 
-*Not available yet.*
+For the client side we are using **Vue 3** with a Vuex store to handle state, and we make use of the [Composition API](https://v3.vuejs.org/guide/composition-api-introduction.html) which means that our components use the setup function instead of data, methods etc. Instead of JavaScript I decided to use TypeScript since we do we have support for it and I'm an advocate for strongly typed and strict languages. Even if it can be more time-consuming I believe it's worth it in the end, especially if one works with more people on the project.
+
+We should keep in mind that the newest version of Vue and the support of TypeScript are not fully documented yet and finding information on certain things could be a little bit harder. Since this project is only a proof of concept, I will allow myself to experiment a little bit. For the ease of use, this section in the documentation will explain any non-straightforward concept that one could possibly encounter.
+
+
+
+***Currently in works:***
+
+- *Vuex store architecture* ✍️
+- *Pages and components*
+- *Styling*
 
 
 
@@ -35,7 +45,7 @@ When it comes to the server side architecture, it's quite clear since we're depe
 
 #### Django REST Framework
 
-Since the project involves this technology, I thought it could be worth mentioning what it brings into the application and why I decided to use it. Django REST Framework is nothing else than a tool that helps developers easily create API routes which can be monotone. Aside of that it also involves other features like:
+Since the project involves this technology, I thought it could be worth mentioning what it brings into the application and why I decided to use it. [Django REST Framework](https://www.django-rest-framework.org/) is nothing else than a tool that helps developers easily create API routes which can be monotone. Aside of that it also involves other features like:
 
 - Making the API web browsable
 - Serialization that supports ORM and non-ORM data sources
@@ -50,6 +60,12 @@ Another big plus of using it is the really good documentation and community supp
 #### Using PostgreSQL
 
 For the database I decided to use PostgreSQL, one that conforms to the SQL syntax. It's fully handled by Docker since I'm using an already existing image like mentioned before so you don't have to worry about installing anything. The user and the database are created using information from the .env file.
+
+
+
+#### The API
+
+The API in our application has a very simple structure thanks for DRF. Some paths got added on top of it following the REST methodology which makes it easy to use for the developers. The full documentation of the API is currently in works and will be published shortly.
 
 
 
