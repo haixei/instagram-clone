@@ -6,8 +6,12 @@ class User(models.Model):
     username = models.CharField(max_length=50)
     bio = models.TextField()
     created = models.DateField()
-    following = models.ManyToManyField('self', blank=True, related_name='followed_users', symmetrical=False)
+    following = models.ManyToManyField('self', blank=True, related_name='followedby', symmetrical=False)
     avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+
+    @property
+    def followers(self):
+        return self.followedby.all()
 
 
 class Comment(models.Model):
