@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'way',
     'rest_framework',
     'corsheaders',
+    # Documentation generator
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -53,12 +55,28 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+# DRF Settings
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# Docs settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+}
+
 ROOT_URLCONF = 'server.urls'
 
+# Retrieve the relative path
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(PROJECT_PATH, 'templates/')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +151,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:8000'
+    'http://localhost:8000'
 ]
 
 ALLOWED_HOSTS = ['server', '0.0.0.0']
