@@ -7,9 +7,9 @@ This project is a full-stack application made with Django and Vue that imitates 
 
 
 
-- [Documentation](https://github.com/haixei/instagram-clone/blob/master/docs/docs.md)
-- [Developer API reference](https://haixei.github.io/instagram-clone/)
-- Live website (in development) 🛠
+- [*Documentation*](https://github.com/haixei/instagram-clone/blob/master/docs/docs.md)
+- [*Developer API reference*](https://haixei.github.io/instagram-clone/)
+- *Live website (in development)* 🛠
 
 
 
