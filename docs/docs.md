@@ -1,6 +1,6 @@
 # Project Documentation
 
-This documentation includes all the important information one should know after cloning the application and deciding to build something similar or change it.
+This documentation includes all the important information one should know after cloning the application and deciding to build something similar or change it. Both front & back end sections have a short walk-trough section for people who want to know more about every part of the application.
 
 **Legend:**
 
@@ -39,13 +39,13 @@ We should keep in mind that the newest version of Vue and the support of TypeScr
 
 ##  Server side architecture
 
-When it comes to the server side architecture, it's quite clear since we're dependent on how Django, a very opinionated framework, handles things. The structure of the repository will probably resemble what you've seen before. If you don't have any experience with the framework, I recommend checking out this page first. We're working with one application within the project, our Instagram clone and if you created all necessary files mentioned in the project readme, you're most likely good to go. 
+When it comes to the server side architecture, it's quite clear since we're dependent on how Django, a very opinionated framework, handles things. The structure of the repository will probably resemble what you've seen before. If you don't have any experience with the framework, I recommend checking out [this page](https://www.djangoproject.com/start/) first. We're working with one application within the project, our Instagram clone and if you created all necessary files mentioned in the project readme, you're most likely good to go. 
 
 
 
 #### Django REST Framework
 
-Since the project involves this technology, I thought it could be worth mentioning what it brings into the application and why I decided to use it. [Django REST Framework](https://www.django-rest-framework.org/) is nothing else than a tool that helps developers easily create API routes which can be monotone. Aside of that it also involves other features like:
+pythonSince the project involves this technology, I thought it could be worth mentioning what it brings into the application and why I decided to use it. [Django REST Framework](https://www.django-rest-framework.org/) is nothing else than a tool that helps developers easily create API routes which can be monotone. Aside of that it also involves other features like:
 
 - Making the API web browsable
 - Serialization that supports ORM and non-ORM data sources
@@ -63,15 +63,48 @@ For the database I decided to use PostgreSQL, one that conforms to the SQL synta
 
 
 
+#### Using DRF Spectacular
+
+I'm someone who values good documentation a lot and in this project I decided to install drf-spectacular to help me with generating an API one. I'm adding this section to avoid confusion if someone looks into the views file and sees some weird decorators, don't be scared, they just defined how the schema for the routes is generated. 
+
+Here's an example how it looks like:
+
+```python
+# Example from our views.py
+@extend_schema(
+    # Defining what kind of response we can expect
+	responses=UserSerializer,
+)
+def get_user_by_username((self, request, username):
+# (...)
+
+# Example from the library documentation
+@extend_schema(
+        parameters=[
+          QuerySerializer,  # serializer fields are converted to parameters
+          OpenApiParameter("nested", QuerySerializer),  # serializer object is converted to a parameter
+          OpenApiParameter("queryparam1", OpenApiTypes.UUID, OpenApiParameter.QUERY),
+          OpenApiParameter("pk", OpenApiTypes.UUID, OpenApiParameter.PATH), # path variable was overridden
+        ],
+        request=YourRequestSerializer,
+        responses=YourResponseSerializer,
+        # more customizations
+)
+def retrieve(self, request, pk, *args, **kwargs)
+# (...)
+```
+
+ ..and [here](https://drf-spectacular.readthedocs.io/en/latest/readme.html#customization-by-using-extend-schema) you can check out how to customize the properties of it.
+
+
+
 #### The API
 
-The API in our application has a very simple structure thanks for DRF. Some paths got added on top of it following the REST methodology which makes it easy to use for the developers. The full documentation of the API is currently in works and will be published shortly.
+The API in our application has a very simple structure thanks for DRF. Some paths got added on top of it following the REST methodology which makes it easy to use for the developers. The full documentation of the API can be accessed [here.](https://haixei.github.io/instagram-clone/)
 
 
 
 ## Deployment guidelines
 
-*Not available yet.*
-
- 
+*Not available yet.* 
 
