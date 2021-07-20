@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <p>{{ totalCount }}</p>
-    <HelloWorld msg="Hello! This is the main page." />
     <ImagePost v-for="image in images" v-bind:key="image" v-bind:image="image" />
   </div>
 </template>
@@ -14,8 +12,7 @@ import { useStore } from "../store/index"
 import { ActionTypes } from '../store/actions'
 
 // Import Components
-import HelloWorld from "../components/HelloWorld.vue";
-import ImagePost from "../components/ImagePost.vue";
+import ImagePost from "../components/Content/ContentHandles/ImagePost.vue";
 
 // Import from the Composition API
 import { onMounted, computed } from 'vue'
@@ -23,10 +20,11 @@ import { onMounted, computed } from 'vue'
 export default defineComponent({
   name: "Home",
   components: {
-    HelloWorld,
     ImagePost,
   },
   setup: () => {
+    // Testint the store, it returns totalCount that can be used in the markup rigth away
+    // To be deleted in the near future :)
     const store = useStore()
     onMounted(() => store.dispatch(ActionTypes.GetCounter))
     const totalCount = computed(() => store.getters.counterValue)

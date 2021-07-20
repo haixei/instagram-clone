@@ -1,9 +1,5 @@
 <template>
-  <div class="hello">
-    <h1>{{ image.image }}</h1>
-    <p>With 0.0.0.0:8000</p>
-    <div class="img" v-bind:style="{ backgroundImage: 'url(' + 'http://0.0.0.0:8000/api/media/images/yoksel-zok-zAG0Q23ubeo-unsplash_2GyxDwE.jpg' + ')' }"></div>
-
+  <div class="image-post">
     <p>With server:8000</p>
     <div class="img" v-bind:style="{ backgroundImage: 'url(' + image.image }"></div>
   </div>

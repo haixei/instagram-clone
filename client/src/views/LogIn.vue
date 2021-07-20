@@ -2,8 +2,8 @@
   <div class="login">
       <img src="@/assets/icons/ig-white.svg" class="insta-logo login-icon">
       <div class="login-box">
-          <h1>Welcome to Instagram.</h1>
-          <span class="small-text">Choose any option below to log in or sign up.</span>
+          <h1>Instagram.</h1>
+          <span class="small-text">Make the time stop, take the image.</span>
           <button class="login-option login-option--google">
               <img src="@/assets/icons/google.svg" class="sm-icon">
               Continue with Google
@@ -68,25 +68,22 @@ h1{
     width: 85%;
     height: 50px;
     margin: 10px 0;
-    border: none;
-    border-radius: $radius-button;
     font-size: 0.93em;
     position: relative;
     transition: background-color 0.15s;
 }
 
 .login-option--google{
-    background-color: #f3f3f3;
+    background-color: $lightgray;
 }
 
 .login-option--twitter{
-    background-color: #6BB8FF;
+    background-color: #5fa4e4;
     color: #fff;
 }
 
 .login-option--test{
-    background-color: $black;
-    color: #fff;
+    background-color: $lightgray;
     transition: color 0.6s 0.5s;
 }
 
@@ -108,7 +105,7 @@ h1{
 }
 
 .login-option--twitter:hover{
-    background-color: darken(#6BB8FF, 5%);
+    background-color: darken(#5fa4e4, 5%);
 }
 
 .login-option--test:hover{
@@ -126,15 +123,14 @@ h1{
     content:"Let's begin";
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, #ffcc3e, #FF6948, #5D25FC);
     position: absolute;
     left: 0;
     top: 0;
     border: none;
-    border-radius: $radius-button;
+    border-radius: $radius--btn;
     opacity: 0;
     transition: opacity 0.5s, background-color 0.5s 0.5s, color 0.6s 0.5s ease-in-out;
-    background-size: 150% auto;
+    background-color: $purple;
     display: flex;
     justify-content: center;
     align-items: center;
