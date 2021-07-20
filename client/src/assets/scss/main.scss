@@ -1,24 +1,27 @@
 // Misc. Variables
-$radius: 8px;
-$radius-button: 4px;
+$radius: 6px;
+$radius--btn: 4px;
 
 // Palette
 $black: #161616;
+$lightgray: #f3f3f3;
+$gradient: linear-gradient(45deg, #ecc39c, #471EBA);
+$purple: #7550db;
 
 // Add fonts
 @font-face {
     font-family: 'Swiss';
-    src: url('/assets/fonts/swiss.ttf') format('truetype');
+    src: url('/assets/fonts/halvetica.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'SwissMed';
-    src: url('/assets/fonts/swiss-med.ttf') format('truetype');
+    src: url('/assets/fonts/halvetica-bold.ttf') format('truetype');
 }
 
 // Global styles
 body{
-    background: linear-gradient(to right top, #ffcc3e, #FF6948, #5D25FC);
+    background-image: $gradient;
     min-height: 100vh;
     padding: 0;
     margin: 0;
@@ -28,23 +31,61 @@ body{
     -moz-osx-font-smoothing: grayscale;
 }
 
+// Titles
 h1{
     font-family: "SwissMed", sans-serif;
     font-weight: 600;
 }
 
-button{
+// Buttons
+.button, button{
     font-family: "Swiss", sans-serif;
     padding: 0px;
     line-height: 1.6em;
     padding-top: 0.3em;
     cursor: pointer;
+    border: none;
+    border-radius: $radius--btn;
+    transition: background-color 0.5s;
 }
 
+.button{
+    padding: 13px 20px 10px;
+}
+
+.button--purple{
+    color: $lightgray;
+    background-color: $purple;
+}
+
+.button--purple:hover{
+    background-color: darken($purple, 10%);
+}
+
+.button--white{
+    background-color: $lightgray;
+}
+
+.button--white:hover{
+    background-color: darken($lightgray, 10%);
+}
+
+// Wrappers
+.button-wrapper{
+    display: flex;
+    flex-direction: row;
+    button:nth-child(1){
+        margin-right: 10px;
+    }
+}
+
+// Icons
 .insta-logo{
     height: 34px;
 }
 
+
+// Other
 span{
     color: #8d8d8d;
 }
