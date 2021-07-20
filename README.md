@@ -7,6 +7,12 @@ This project is a full-stack application made with Django and Vue that imitates 
 
 
 
+- [Documentation](https://github.com/haixei/instagram-clone/blob/master/docs/docs.md)
+- [Developer API reference](https://haixei.github.io/instagram-clone/)
+- Live website (in development) 🛠
+
+
+
 ## How to start?
 
 Starting the application is quite easy and all we need for this purpose is a Docker installed on your machine. The docker-compose file specifies everything about the start-up of the containers, if you miss anything, look there.
@@ -60,9 +66,7 @@ docker-compose up -d
 
 
 
-## Documentation
+## Contribute
 
-Despite being quite compact, this project has some things that could be documented for the future users. At the moment the documentation includes the Docker implementation, deployment guide and overview of the architecture.
-
-The documentation files can be find [here.](./docs/docs.md)
+This project serves only an educational purpose, but contributions related to improving the quality of the code are very much welcome. The app in the future could serve as a resource for people who want to learn more about Django or Vue.
 
