@@ -1,0 +1,1071 @@
+openapi: 3.0.3
+info:
+  title: Your Project API
+  version: 1.0.0
+  description: Your project description
+paths:
+  /api/comments/:
+    get:
+      operationId: comments_list
+      description: ''
+      tags:
+      - comments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+          description: ''
+    post:
+      operationId: comments_create
+      description: ''
+      tags:
+      - comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+  /api/comments/{id}/:
+    get:
+      operationId: comments_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comment.
+        required: true
+      tags:
+      - comments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+    put:
+      operationId: comments_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comment.
+        required: true
+      tags:
+      - comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+    patch:
+      operationId: comments_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comment.
+        required: true
+      tags:
+      - comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedComment'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+    delete:
+      operationId: comments_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comment.
+        required: true
+      tags:
+      - comments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/postedimages/:
+    get:
+      operationId: postedimages_list
+      description: ''
+      tags:
+      - postedimages
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostedImage'
+          description: ''
+    post:
+      operationId: postedimages_create
+      description: ''
+      tags:
+      - postedimages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostedImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PostedImage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PostedImage'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostedImage'
+          description: ''
+  /api/postedimages/{id}/:
+    get:
+      operationId: postedimages_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posted image.
+        required: true
+      tags:
+      - postedimages
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostedImage'
+          description: ''
+    put:
+      operationId: postedimages_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posted image.
+        required: true
+      tags:
+      - postedimages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostedImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PostedImage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PostedImage'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostedImage'
+          description: ''
+    patch:
+      operationId: postedimages_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posted image.
+        required: true
+      tags:
+      - postedimages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPostedImage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPostedImage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPostedImage'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostedImage'
+          description: ''
+    delete:
+      operationId: postedimages_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this posted image.
+        required: true
+      tags:
+      - postedimages
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/postedimages/getFeed/{username}:
+    get:
+      operationId: postedimages_getFeed_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+      tags:
+      - postedimages
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostedImage'
+          description: ''
+  /api/postedimages/hashtag/{hashtag}:
+    get:
+      operationId: postedimages_hashtag_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: hashtag
+        schema:
+          type: string
+        required: true
+      tags:
+      - postedimages
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostedImage'
+          description: ''
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/users/:
+    get:
+      operationId: users_list
+      description: ''
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+    post:
+      operationId: users_create
+      description: ''
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/users/{id}/:
+    get:
+      operationId: users_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: users_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: users_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/users/username/{username}:
+    get:
+      operationId: users_username_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/userstories/:
+    get:
+      operationId: userstories_list
+      description: ''
+      tags:
+      - userstories
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserStory'
+          description: ''
+    post:
+      operationId: userstories_create
+      description: ''
+      tags:
+      - userstories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserStory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserStory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserStory'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStory'
+          description: ''
+  /api/userstories/{id}/:
+    get:
+      operationId: userstories_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user story.
+        required: true
+      tags:
+      - userstories
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStory'
+          description: ''
+    put:
+      operationId: userstories_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user story.
+        required: true
+      tags:
+      - userstories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserStory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserStory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserStory'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStory'
+          description: ''
+    patch:
+      operationId: userstories_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user story.
+        required: true
+      tags:
+      - userstories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserStory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserStory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserStory'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStory'
+          description: ''
+    delete:
+      operationId: userstories_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user story.
+        required: true
+      tags:
+      - userstories
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/userstories/username/{username}:
+    get:
+      operationId: userstories_username_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+      tags:
+      - userstories
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStory'
+          description: ''
+components:
+  schemas:
+    ActionAuthor:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 50
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - username
+    Comment:
+      type: object
+      properties:
+        content:
+          type: string
+          maxLength: 200
+        author:
+          $ref: '#/components/schemas/ActionAuthor'
+        likes:
+          type: array
+          items:
+            type: integer
+      required:
+      - author
+      - content
+    PatchedComment:
+      type: object
+      properties:
+        content:
+          type: string
+          maxLength: 200
+        author:
+          $ref: '#/components/schemas/ActionAuthor'
+        likes:
+          type: array
+          items:
+            type: integer
+    PatchedPostedImage:
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 200
+        created:
+          type: string
+          format: date
+        likes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionAuthor'
+          readOnly: true
+        image:
+          type: string
+          readOnly: true
+        author:
+          $ref: '#/components/schemas/ActionAuthor'
+        hashtags:
+          type: array
+          items:
+            type: string
+          nullable: true
+    PatchedUser:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 50
+        bio:
+          type: string
+        created:
+          type: string
+          format: date
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFollowing'
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFollowing'
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+    PatchedUserStory:
+      type: object
+      properties:
+        created:
+          type: string
+          format: date
+        author:
+          $ref: '#/components/schemas/ActionAuthor'
+        image:
+          type: string
+          format: uri
+          nullable: true
+    PostedImage:
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 200
+        created:
+          type: string
+          format: date
+        likes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActionAuthor'
+          readOnly: true
+        image:
+          type: string
+          readOnly: true
+        author:
+          $ref: '#/components/schemas/ActionAuthor'
+        hashtags:
+          type: array
+          items:
+            type: string
+          nullable: true
+      required:
+      - author
+      - created
+      - description
+      - image
+      - likes
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 50
+        bio:
+          type: string
+        created:
+          type: string
+          format: date
+        following:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFollowing'
+        followers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFollowing'
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - bio
+      - created
+      - followers
+      - following
+      - username
+    UserFollowing:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 50
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - username
+    UserStory:
+      type: object
+      properties:
+        created:
+          type: string
+          format: date
+        author:
+          $ref: '#/components/schemas/ActionAuthor'
+        image:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - author
+      - created
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: Session
