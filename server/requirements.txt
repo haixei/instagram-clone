@@ -7,3 +7,4 @@ pillow==8.2.0
 pyyaml==5.4.1
 uritemplate==3.0.1
 drf-spectacular==0.17.2
+django-allauth==0.45.0
