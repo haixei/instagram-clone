@@ -5,6 +5,7 @@ from way.views import *
 from django.conf.urls.static import static
 from django.conf import settings
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from django.contrib.auth.views import LogoutView
 
 router = routers.DefaultRouter()
 router.register(r'comments', CommentView, 'comment')
@@ -27,5 +28,7 @@ urlpatterns = [
             UserStoryView.as_view({'get': 'get_stories'})),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('api/oauth/', include('allauth.urls')),
+    path('api/logout', LogoutView.as_view()),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
