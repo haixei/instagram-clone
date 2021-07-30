@@ -14,8 +14,7 @@ services:
       - "db"
     volumes:
       - ./server:/app
-      - /app/way/migrations
-    user: "1000:1000"
+      - migrations:/app/way/migrations
   client:
     image: client
     build:
@@ -32,8 +31,10 @@ services:
     env_file: 
       - ./.env 
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - datapg:/var/lib/postgresql/data
     ports:
       - 5432:5432
 volumes:
   datapg:
+  migrations:
+
