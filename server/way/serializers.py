@@ -2,15 +2,15 @@ from rest_framework import serializers
 from .models import User, Comment, PostedImage, UserStory
 
 
-class UserFollowingSerializer(serializers.ModelSerializer):
+class ProfileFollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'avatar')
 
 
-class UserSerializer(serializers.ModelSerializer):
-    followers = UserFollowingSerializer(many=True)
-    following = UserFollowingSerializer(many=True)
+class ProfileSerializer(serializers.ModelSerializer):
+    followers = ProfileFollowingSerializer(many=True)
+    following = ProfileFollowingSerializer(many=True)
     class Meta:
         model = User
         fields = ('username', 'bio', 'created', 'following', 'followers', 'avatar')

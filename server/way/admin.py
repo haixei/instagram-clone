@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import User, Comment, PostedImage, UserStory
+from .models import Profile, Comment, PostedImage, UserStory
 
 
-class UserAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     filter_horizontal = ('following',)
     list_display = ('username', 'bio', 'created', 'avatar')
 
@@ -21,7 +21,7 @@ class UserStoryAdmin(admin.ModelAdmin):
     list_display = ('created', 'author', 'image')
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(PostedImage, PostedImageAdmin)
 admin.site.register(UserStory, UserStoryAdmin)

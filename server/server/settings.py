@@ -25,17 +25,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'way',
     'rest_framework',
     'corsheaders',
     # Documentation generator
     'drf_spectacular',
-    # Authentication
+    # Auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -54,10 +54,12 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
-SITE_ID = 3
+# Authentication settings
+SITE_ID = 4
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
