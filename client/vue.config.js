@@ -4,6 +4,10 @@ module.exports = {
         proxy: {
             "/api/*": {
                 target: "http://server:8000",
+            },
+            "/oauth/*": {
+                target: "http://server:8000",
+                changeOrigin: false
             }
         }
     }
