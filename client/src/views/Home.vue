@@ -23,7 +23,7 @@ export default defineComponent({
     ImagePost,
   },
   setup: () => {
-    // Testint the store, it returns totalCount that can be used in the markup rigth away
+    // Testing the store, it returns totalCount that can be used in the markup right away
     // To be deleted in the near future :)
     const store = useStore()
     onMounted(() => store.dispatch(ActionTypes.GetCounter))

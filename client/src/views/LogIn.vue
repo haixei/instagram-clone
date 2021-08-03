@@ -130,7 +130,7 @@ h1{
     border-radius: $radius--btn;
     opacity: 0;
     transition: opacity 0.5s, background-color 0.5s 0.5s, color 0.6s 0.5s ease-in-out;
-    background-color: $purple;
+    background-color: $main;
     display: flex;
     justify-content: center;
     align-items: center;

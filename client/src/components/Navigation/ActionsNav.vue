@@ -2,7 +2,7 @@
   <div class="actions-nav">
       <img src="@/assets/icons/ig-black.svg">
       <div class="button-wrapper">
-        <button class="button button--purple">Post</button>
+        <button class="button button--main">Post</button>
         <button class="button button--white">Log Out</button>
       </div>
   </div>
@@ -23,7 +23,7 @@ export default defineComponent({
     position: absolute;
     top: 0;
     width: 20vw;
-    height: 70px;
+    height: 55px;
     border: none;
     border-radius: $radius;
     background-color: white;
