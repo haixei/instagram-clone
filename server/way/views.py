@@ -1,15 +1,28 @@
 # Custom schema support
-from django.contrib.auth.decorators import login_required
-from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Profile, Comment, PostedImage, UserStory
 from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer
 
 
 class ProfileView(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
+
+    @extend_schema(
+        request=PostedImageSerializer,
+        responses=PostedImageSerializer,
+    )
+    def get_feed(self, request, username):
+        print('test')
+        profile = Profile.objects.get(username=username)
+        followed = profile.following.values_list('username', flat=True)
+        images = PostedImage.objects.filter(author__username__in=followed)
+        serializer = self.serializer_class(images, many=True)
+        return Response(serializer.data)
 
 
 class CommentView(viewsets.ModelViewSet):
@@ -25,18 +38,6 @@ class PostedImageView(viewsets.ModelViewSet):
         request=PostedImageSerializer,
         responses=PostedImageSerializer,
     )
-    def get_feed(self, request, username):
-        print('test')
-        profile = Profile.objects.get(username=username)
-        followed = profile.following.values_list('username', flat=True)
-        images = PostedImage.objects.filter(author__username__in=followed)
-        serializer = self.serializer_class(images, many=True)
-        return Response(serializer.data)
-
-    @extend_schema(
-        request=PostedImageSerializer,
-        responses=PostedImageSerializer,
-    )
     def get_feed_from_hashtag(self, request, hashtag):
         images = PostedImage.objects.filter(hashtags__icontains=hashtag)
         serializer = self.serializer_class(images, many=True)
@@ -46,6 +47,7 @@ class PostedImageView(viewsets.ModelViewSet):
 class UserStoryView(viewsets.ModelViewSet):
     serializer_class = UserStorySerializer
     queryset = UserStory.objects.all()
+    permission_classes = [IsAuthenticated]
 
     @extend_schema(
         request=UserStorySerializer,

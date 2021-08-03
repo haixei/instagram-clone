@@ -1,33 +1,36 @@
 from rest_framework import serializers
-from .models import User, Comment, PostedImage, UserStory
+from .models import Profile, Comment, PostedImage, UserStory
+
 
 
 class ProfileFollowingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('username', 'avatar')
+        model = Profile
+        fields = '__all__'
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     followers = ProfileFollowingSerializer(many=True)
     following = ProfileFollowingSerializer(many=True)
+
     class Meta:
-        model = User
-        fields = ('username', 'bio', 'created', 'following', 'followers', 'avatar')
+        model = Profile
+        fields = '__all__'
         depth = 1
 
 
 class ActionAuthorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ('username', 'avatar')
+        model = Profile
+        fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
     author = ActionAuthorSerializer()
+
     class Meta:
         model = Comment
-        fields = ('content', 'author', 'likes')
+        fields = '__all__'
 
 
 class PostedImageSerializer(serializers.ModelSerializer):
@@ -37,7 +40,7 @@ class PostedImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PostedImage
-        fields = ('description', 'created', 'likes', 'image', 'author', 'hashtags')
+        fields = '__all__'
 
     def get_image(self, obj):
         if obj.image:
@@ -46,6 +49,7 @@ class PostedImageSerializer(serializers.ModelSerializer):
 
 class UserStorySerializer(serializers.ModelSerializer):
     author = ActionAuthorSerializer()
+
     class Meta:
         model = UserStory
-        fields = ('created', 'author', 'image')
+        fields = '__all__'
