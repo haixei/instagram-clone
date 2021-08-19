@@ -1,5 +1,5 @@
 <template>
-  <div class="actions-nav">
+  <div class="actions-nav flying-wrapper">
       <img src="@/assets/icons/ig-black.svg">
       <div class="button-wrapper">
         <button class="button button--main">Post</button>

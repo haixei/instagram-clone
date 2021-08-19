@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-      <img src="@/assets/icons/ig-white.svg" class="insta-logo login-icon">
+      <img src="@/assets/icons/ig-black.svg" class="insta-logo login-icon">
       <div class="login-box">
           <h1>Instagram.</h1>
           <span class="small-text">Make the time stop, take the image.</span>
@@ -114,7 +114,6 @@ h1{
 
 .login-option--test:hover::before{
     opacity: 100;
-    background-position: right center;
     color: rgb(255, 255, 255);
 }
 
@@ -130,7 +129,7 @@ h1{
     border-radius: $radius--btn;
     opacity: 0;
     transition: opacity 0.5s, background-color 0.5s 0.5s, color 0.6s 0.5s ease-in-out;
-    background-color: $main;
+    background: linear-gradient(240deg, #FF0000 -26.06%, #6742FB 51.71%, #FFCD9E 103.78%);;
     display: flex;
     justify-content: center;
     align-items: center;

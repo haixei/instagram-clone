@@ -20,7 +20,7 @@ $main: #003ada;
 
 // Global styles
 body{
-    background-image: linear-gradient(45deg, #FBF4EE -20.41%, #f0a480 16.74%, #003ada 107.05%);
+    background: #F5F5F5;
     min-height: 100vh;
     padding: 0;
     margin: 0;
@@ -54,7 +54,7 @@ h1{
 
 .button--main{
     color: $lightgray;
-    background-color: $main;
+    background: linear-gradient(240deg, #FF0000 -26.06%, #6742FB 51.71%, #FFCD9E 103.78%);
 }
 
 .button--main:hover{
@@ -87,4 +87,9 @@ h1{
 // Other
 span{
     color: #8d8d8d;
+}
+
+// Global component styles
+.flying-wrapper{
+    box-shadow: 0 20px 30px #ebebeb;
 }
