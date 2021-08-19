@@ -1,9 +1,13 @@
 import { ActionContext, ActionTree } from 'vuex'
 import { Mutations, MutationType } from './mutations'
-import { State } from './state'
+import { State, User } from './state'
+import axios from "axios";
 
+// This module allows you to create actions, actions are similar to mutations but they,
+// instead of mutating the state, commit the mutations and can contain arbitrary
+// asynchronous operations
 export enum ActionTypes {
-    GetCounter = 'GET_COUNTER'
+    UpdateUser = 'UPDATE_USER'
 }
 
 type ActionAugments = Omit<ActionContext<State, State>, 'commit'> & {
@@ -14,12 +18,20 @@ type ActionAugments = Omit<ActionContext<State, State>, 'commit'> & {
 }
 
 export type Actions = {
-    [ActionTypes.GetCounter](context: ActionAugments): void
+    [ActionTypes.UpdateUser](context: ActionAugments): void
 }
 
 export const actions: ActionTree<State, State> & Actions = {
-    async [ActionTypes.GetCounter]({ commit }) {
-        // Set the counter to a random number between 0 and 9
-        commit(MutationType.ChangeCounter, Math.floor(Math.random() * 10))
+    async [ActionTypes.UpdateUser]({ commit }){
+        const user = {
+            "user": 1,
+            "followers": [],
+            "following": [],
+            "username": 'testuser',
+            "bio": 'my bio',
+            "created": '22/22/1000',
+            "avatar": null
+        }
+        commit(MutationType.UpdateUser, user);
     }
-  }
+}

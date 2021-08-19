@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import LogIn from "../views/LogIn.vue";
+import { useStore } from "../store/index"
+import { ActionTypes } from '../store/actions'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,5 +30,17 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+// Creating a route guard to redirect if a user is not logged in
+const store = useStore();
+store.dispatch(ActionTypes.UpdateUser)
+const user = store.getters.user_data;
+const isAuthenticated = (user == null) ? false : true;
+
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'LogIn' && !isAuthenticated) next({ name: 'LogIn' })
+    else if(to.name == 'LogIn' && isAuthenticated) next({ name: 'Home' })
+    else next();
+})
 
 export default router;

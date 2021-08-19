@@ -1,16 +1,17 @@
 import { MutationTree } from "vuex";
-import { State } from "./state"
+import { State, User } from "./state"
 
+// Changing values of the information, must be synchronous!
 export enum MutationType {
-    ChangeCounter = "CHANGE_COUNTER"
+    UpdateUser = "UPDATE_USER"
 }
 
 export type Mutations = {
-    [MutationType.ChangeCounter](state: State, value: number):void
+    [MutationType.UpdateUser](state: State, value: User | null):void
 }
 
 export const mutations: MutationTree<State> & Mutations = {
-    [MutationType.ChangeCounter](state, value){
-        state.counter = value
+    [MutationType.UpdateUser](state, value){
+        state.user = value
     }
 }
