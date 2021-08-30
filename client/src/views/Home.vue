@@ -1,19 +1,31 @@
 <template>
   <div class="home">
-    <ImagePost v-for="image in images" v-bind:key="image" v-bind:image="image" />
+    <StoryList :stories="stories"></StoryList>
   </div>
 </template>
 
 <script lang="ts">
-// Import libraries & tools
 import { defineComponent } from "vue";
-// Import Components
-import ImagePost from "../components/Content/ContentHandles/ImagePost.vue";
+import StoryList from "../components/Stories/StoryList.vue";
+import { Story } from "../interfaces/data"
 
 export default defineComponent({
   name: "Home",
   components: {
-    ImagePost,
+    StoryList,
+  },
+  setup(){
+    // Create an interface for the story object
+
+    const stories:Array<Story> = [
+      {
+        user: 'user1',
+        stories: ['story1', 'story2'],
+        read: false
+      }
+    ]
+
+    return { stories }
   }
 });
 </script>
