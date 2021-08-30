@@ -4,41 +4,47 @@ $radius--btn: 4px;
 
 // Palette
 $black: #161616;
+$white: #F5F5F5;
 $lightgray: #f3f3f3;
+$line: #dddddd;
 $main: #003ada;
 
 // Add fonts
 @font-face {
-    font-family: 'Swiss';
-    src: url('/assets/fonts/halvetica.ttf') format('truetype');
+    font-family: 'Halvetica';
+    src: url('~@/assets/fonts/Helvetica.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'SwissMed';
-    src: url('/assets/fonts/halvetica-bold.ttf') format('truetype');
+    font-family: 'HalveticaMed';
+    src: url('~@/assets/fonts/Helvetica-Med.ttf') format('truetype');
 }
 
 // Global styles
 body{
-    background: #F5F5F5;
+    background: $white;
     min-height: 100vh;
     padding: 0;
-    margin: 0;
+    margin: 150px 0 0 0;
     color: #141414;
-    font-family: "Swiss", sans-serif;
+    font-family: "Halvetica", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+.home, .login{
+    width: 55%;
+    margin: 0 auto;
+}
+
 // Titles
 h1{
-    font-family: "SwissMed", sans-serif;
-    font-weight: 600;
+    font-family: 'HalveticaMed', sans-serif;
 }
 
 // Buttons
 .button, button{
-    font-family: "Swiss", sans-serif;
+    font-family: 'Halvetica', sans-serif;
     padding: 0px;
     line-height: 1.6em;
     padding-top: 0.3em;
@@ -54,11 +60,15 @@ h1{
 
 .button--main{
     color: $lightgray;
-    background: linear-gradient(240deg, #FF0000 -26.06%, #6742FB 51.71%, #FFCD9E 103.78%);
+    background-size: 100% auto!important;
+    background: linear-gradient(240deg, #FF0000 -26.06%, #4317f5 51.71%, #FFCD9E 103.78%);
+    transition: 0.3s;
 }
 
 .button--main:hover{
     background-color: darken($main, 10%);
+    background-position: left center;
+    background-size: 180% auto!important;
 }
 
 .button--white{
@@ -83,6 +93,12 @@ h1{
     height: 28px;
 }
 
+// Styling sections
+.section-header{
+    font-size: 1.2em;
+    color: $black;
+    font-family: 'HalveticaMed', sans-serif;
+}
 
 // Other
 span{
