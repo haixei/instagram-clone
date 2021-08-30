@@ -20,7 +20,7 @@ export default defineComponent({
 @import "@/assets/scss/main.scss";
 
 .actions-nav{
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 20vw;
     height: 55px;
