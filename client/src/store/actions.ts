@@ -1,7 +1,6 @@
 import { ActionContext, ActionTree } from 'vuex'
 import { Mutations, MutationType } from './mutations'
-import { State, User } from './state'
-import axios from "axios";
+import { State } from './state'
 
 // This module allows you to create actions, actions are similar to mutations but they,
 // instead of mutating the state, commit the mutations and can contain arbitrary

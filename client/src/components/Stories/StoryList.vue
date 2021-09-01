@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import { reactive, defineComponent, computed } from "vue";
+import { reactive, defineComponent, computed, watch } from "vue";
 import StoryCircle from "./StoryCircle.vue";
 import StoryContent from "./StoryContent.vue";
-import { Story } from "../../interfaces/data"
+import { Story } from "../../store/state"
 
 export default defineComponent({
   name: "ImagePost",
@@ -29,10 +29,22 @@ export default defineComponent({
 
     // Extract the authors
     let authors:Array<string> = [];
-    props.stories.forEach((story: Story) => {
-      if(!authors.includes(story.user)){
-        authors.push(story.user);
-      }
+    
+    const updateAuthors = (list: Array<string>, stories: Array<Story>) => {
+      stories.forEach((story: Story) => {
+        if(!list.includes(story.user)){
+          list.push(story.user);
+        }
+      });
+    }
+
+    // Get the initial line of authors
+    updateAuthors(authors, props.stories);
+
+    // Watch for the change of the stories and update the authors if needed
+    watch(() => props.stories, (first, second) => {
+      // If the story changes, change to the first image of the new story
+      updateAuthors(authors, props.stories);
     });
 
     // Select a story to show
