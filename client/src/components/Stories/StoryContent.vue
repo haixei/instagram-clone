@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, defineComponent } from "vue";
+import { reactive, defineComponent, watch } from "vue";
 
 export default defineComponent({
   name: "StoryContent",
@@ -21,6 +21,11 @@ export default defineComponent({
   setup(props, { emit }){
     const state = reactive({
       current_image: props.story.stories[0]
+    });
+
+    watch(() => props.story, (first, second) => {
+      // If the story changes, change to the first image of the new story
+      state.current_image = props.story.stories[0];
     });
 
     function toggleModal(){
@@ -42,7 +47,7 @@ export default defineComponent({
             // If there is no more images backwards, switch to the previous story
             emit('changeStory', -1)
         }
-        else if(new_index > props.story.stories.length){
+        else if(new_index > props.story.stories.length - 1){
             // .. or the next one if going forward
             emit('changeStory', 1)
         }

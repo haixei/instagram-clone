@@ -15,12 +15,15 @@ export default defineComponent({
     StoryList,
   },
   setup(){
-    // Create an interface for the story object
-
     const stories:Array<Story> = [
       {
         user: 'user1',
         stories: ['story1', 'story2'],
+        read: false
+      },
+      {
+        user: 'user2',
+        stories: ['story3', 'story4'],
         read: false
       }
     ]

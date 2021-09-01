@@ -2,7 +2,7 @@
   <div class="image-post">
     <span class="section-header">Stories</span>
     <StoryCircle v-for="author in authors" :key="author" :author="author" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
-    <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="getStory(state.current_story_author)"></StoryContent>
+    <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="state.story"></StoryContent>
   </div>
 </template>
 
@@ -23,7 +23,8 @@ export default defineComponent({
     // Create the state
     const state = reactive({
       show_story: false,
-      current_story_author: ''
+      current_story_author: '',
+      story: computed(() => props.stories.find((story: Story) => story.user == state.current_story_author))
     });
 
     // Extract the authors
@@ -39,12 +40,6 @@ export default defineComponent({
       state.current_story_author = author
     }
 
-    // Retrieve the story content from the array of them
-    const getStory = (author:string) => {
-      console.log(author);
-      return props.stories.find((story: Story) => story.user == state.current_story_author);
-    }
-
    // Toggle the story card
     const changeVisibility = () => {
         state.show_story = !state.show_story;
@@ -52,12 +47,29 @@ export default defineComponent({
 
     const changeStory = (amount:number) => {
       // Find the index of the current story in the array
+      const curr_index = props.stories.findIndex((story: Story) => story.user == state.current_story_author)
+      console.log(curr_index, amount)
 
+      const stories_len = props.stories.length;
       // Go to the next or previous story, if does not exist move to the last or first story respectively
+      if(curr_index == stories_len - 1 && amount == 1 && stories_len > 1){
+        state.current_story_author = props.stories[0].user
+      }
+      else if(curr_index == 0 && amount == -1 && stories_len > 1){
+        state.current_story_author = props.stories[stories_len - 1].user
+      }
+      else if(stories_len == 0){
+        // Close the modal if we viewed the only story there and have nothing to loop
+        changeVisibility();
+      }
+      else{
+        // Otherwise change the story
+        state.current_story_author = props.stories[curr_index + amount].user
+      }
     }
 
     // Make the property acessible before render so vue doesn't get angry
-    return { state, changeVisibility, openStory, authors, getStory, changeStory }
+    return { state, changeVisibility, openStory, authors, changeStory }
   }
 });
 </script>
