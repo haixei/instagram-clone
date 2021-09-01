@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import StoryList from "../components/Stories/StoryList.vue";
-import { Story } from "../interfaces/data"
+import { useStore } from "../store/index"
 
 export default defineComponent({
   name: "Home",
@@ -15,19 +15,9 @@ export default defineComponent({
     StoryList,
   },
   setup(){
-    const stories:Array<Story> = [
-      {
-        user: 'user1',
-        stories: ['story1', 'story2'],
-        read: false
-      },
-      {
-        user: 'user2',
-        stories: ['story3', 'story4'],
-        read: false
-      }
-    ]
-
+    const store = useStore();
+    const stories = store.getters.stories_data;
+    
     return { stories }
   }
 });
