@@ -2,7 +2,7 @@
     <div class="image">
         <div class="img-box">
             <img src="@/assets/icons/not-found.svg" v-if="!state.imageFound" class="not-found">
-            <img :src="image" @error="notFound" v-if="state.imageFound">
+            <img :src="image" @error="notFound" v-if="state.imageFound" class="found-image">
         </div>
         <div class="info">
             <p class="desc">{{ desc }}</p>
@@ -21,7 +21,7 @@ export default defineComponent({
   props: ["image", "user", "desc"],
   setup(){
     const state = reactive({
-        imageFound: false
+        imageFound: true
     });
 
     const notFound = () => {
@@ -36,8 +36,9 @@ export default defineComponent({
 @import "@/assets/scss/main.scss";
 
 .image{
-    width: 45%;
-    height: 550px;
+    width: 100%;
+    margin: 0 40px;
+    height: 500px;
     background-color: #dfdfdf;
     border-radius: $radius $radius 10px 10px;
     position: relative;
@@ -57,6 +58,7 @@ export default defineComponent({
     color: $gray;
     font-size: 0.93em;
     margin: 0;
+    line-height: 1.25em;
 }
 
 .author-info{
@@ -85,5 +87,12 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.found-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: $radius $radius 0px 0px;
 }
 </style>

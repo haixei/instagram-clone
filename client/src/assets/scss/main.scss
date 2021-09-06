@@ -34,7 +34,7 @@ body{
 }
 
 .home, .login{
-    width: 60%;
+    width: 55%;
     margin: 0 auto;
 }
 
@@ -53,7 +53,6 @@ a{
 .button, button{
     font-family: 'Halvetica', sans-serif;
     padding: 0px;
-    line-height: 1.6em;
     padding-top: 0.3em;
     cursor: pointer;
     border: none;
@@ -62,7 +61,14 @@ a{
 }
 
 .button{
-    padding: 10px 30px 7px;
+    padding: 15px 30px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img{
+        width: 13px;
+        margin-right: 10px;
+    }
 }
 
 .button--main{
@@ -84,6 +90,16 @@ a{
 
 .button--white:hover{
     background-color: darken($lightgray, 10%);
+}
+
+.button--black{
+    color: $white;
+    background-color: $black;
+}
+
+.button--black:hover{
+    color: $white;
+    background-color: lighten($black, 15%);
 }
 
 // Wrappers

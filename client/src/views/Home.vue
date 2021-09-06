@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <StoryList :stories="stories"></StoryList>
-    <imagePost v-for="post in feed" :key="post" :post="post"></imagePost>
+    <imagePost v-for="post in feed" :key="post.id" :post="post"></imagePost>
   </div>
 </template>
 

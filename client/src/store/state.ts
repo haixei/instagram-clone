@@ -19,15 +19,17 @@ export interface Story {
 export interface Comment {
     user: string,
     content: string,
-    likes: number
+    likes: number,
+    id: string
 }
 
 export interface ImagePost {
     user: string,
-    comments: Array<Comment> | null,
+    comments: Array<Comment>
     image: string,
     tags: Array<string> | null,
-    desc: string
+    desc: string,
+    id: string
 }
 
 export type State = {
@@ -51,9 +53,15 @@ export const state: State = {
       }],
     feed: [{
         user: 'user1',
-        comments: null,
-        image: 'someimage.png',
+        comments: [{
+            user: 'user2',
+            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
+            likes: 22,
+            id: '012'
+        }],
+        image: 'https://images.unsplash.com/photo-15793371862546556456',
         tags: ['coolbeach', 'ilikethesun'],
-        desc: 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!'
+        desc: 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
+        id: '032'
     }]
 }

@@ -93,7 +93,7 @@ export default defineComponent({
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid $line;
-    height: 70px;
+    height: 90px;
 }
 
 .section-header{
