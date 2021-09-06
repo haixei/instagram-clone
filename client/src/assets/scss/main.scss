@@ -1,13 +1,14 @@
 // Misc. Variables
 $radius: 6px;
-$radius--btn: 4px;
+$radius--btn: 3px;
 
 // Palette
 $black: #161616;
 $white: #F5F5F5;
 $lightgray: #f3f3f3;
+$gray: #686868;
 $line: #dddddd;
-$main: #003ada;
+$main: #5200FF;
 
 // Add fonts
 @font-face {
@@ -33,13 +34,19 @@ body{
 }
 
 .home, .login{
-    width: 55%;
+    width: 60%;
     margin: 0 auto;
 }
 
 // Titles
 h1{
     font-family: 'HalveticaMed', sans-serif;
+}
+
+// Links
+a{
+    color: $main;
+    text-decoration: none;
 }
 
 // Buttons
@@ -102,7 +109,7 @@ h1{
 
 // Other
 span{
-    color: #8d8d8d;
+    color: $gray;
 }
 
 // Global component styles
