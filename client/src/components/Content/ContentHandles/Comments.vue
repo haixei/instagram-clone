@@ -5,7 +5,9 @@
           <span>{{ comments.length }}</span>
       </div>
       <div class="comment" v-for="comment in comments" :key="comment.id">
-          <div class="avatar"></div>
+          <div class="avatar-cont--small">
+              <Avatar :user="comment.user"></Avatar>
+          </div>
           <p>{{ comment.content }}</p>
           <div class="likes">
               <span>{{ comment.likes }}</span>
@@ -20,11 +22,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
+import Avatar from "../../User/Avatar.vue"
 
 export default defineComponent({
   name: "Comments",
-  props: ["comments"]
+  props: ["comments"],
+  components: {
+      Avatar
+  }
 })
 </script>
 <style scoped lang="scss">
@@ -89,11 +95,7 @@ button{
     }
 }
 
-.avatar{
-    width: 24px;
-    height: 24px;
-    background-color: $black;
-    border-radius: 50vw;
-    margin-right: 15px;
+.avatar-cont--small{
+    margin-right: $avatar-margin;
 }
 </style>

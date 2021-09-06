@@ -1,6 +1,7 @@
 // Misc. Variables
 $radius: 6px;
 $radius--btn: 3px;
+$avatar-margin: 15px;
 
 // Palette
 $black: #161616;
@@ -131,4 +132,10 @@ span{
 // Global component styles
 .flying-wrapper{
     box-shadow: 0 20px 30px #ebebeb;
+}
+
+// Avatar containers
+.avatar-cont--small{
+    width: 24px;
+    height: 24px;
 }

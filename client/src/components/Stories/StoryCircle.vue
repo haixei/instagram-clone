@@ -1,14 +1,19 @@
 <template>
   <div class="circle" @click="toggleModal">
+    <Avatar :user="author"></Avatar>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Avatar from "../User/Avatar.vue"
 
 export default defineComponent({
   name: "StoryCircle",
   props: ["author"],
+  components: {
+    Avatar
+  },
   setup(props, { emit }){
 
     function toggleModal(){

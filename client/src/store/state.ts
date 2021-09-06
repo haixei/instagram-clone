@@ -11,20 +11,20 @@ export interface User {
 }
 
 export interface Story {
-    user: string,
+    user: User,
     stories: Array<string>,
     read: boolean
 }
 
 export interface Comment {
-    user: string,
+    user: User,
     content: string,
     likes: number,
     id: string
 }
 
 export interface ImagePost {
-    user: string,
+    user: User,
     comments: Array<Comment>
     image: string,
     tags: Array<string> | null,
@@ -42,19 +42,38 @@ export type State = {
 export const state: State = {
     user: null,
     stories: [{
-        user: 'user1',
+        user: {
+            user: 39,
+            username: 'user3',
+            followers: [],
+            following: [],
+            bio: '',
+            created: '22/22/2222',
+            avatar: null
+        },
         stories: ['story1', 'story2', 'story3'],
         read: false
-      },
-      {
-        user: 'user2',
-        stories: ['story4'],
-        read: false
-      }],
+    }],
     feed: [{
-        user: 'user1',
+        user: {
+            user: 39,
+            username: 'user3',
+            followers: [],
+            following: [],
+            bio: '',
+            created: '22/22/2222',
+            avatar: null
+        },
         comments: [{
-            user: 'user2',
+            user: {
+                user: 33,
+                username: 'user2',
+                followers: [],
+                following: [],
+                bio: '',
+                created: '22/22/2222',
+                avatar: null
+            },
             content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
             likes: 22,
             id: '012'

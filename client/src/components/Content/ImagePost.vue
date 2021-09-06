@@ -3,7 +3,7 @@
     <div class="tag-box">
       <span class="tag" v-for="tag in post.tags" :key="tag">#{{ tag }}</span>
     </div>
-    <Image :image="post.image" :user="post.user" :desc="post.desc"></Image>
+    <Image :image="post.image" :user="post.user.username" :desc="post.desc"></Image>
     <Comments :comments="post.comments"></Comments>
   </div>
 </template>

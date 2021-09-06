@@ -24,7 +24,7 @@ export default defineComponent({
     const state = reactive({
       show_story: false,
       current_story_author: '',
-      story: computed(() => props.stories.find((story: Story) => story.user == state.current_story_author))
+      story: computed(() => props.stories.find((story: Story) => story.user.username == state.current_story_author))
     });
 
     // Extract the authors
@@ -32,8 +32,8 @@ export default defineComponent({
     
     const updateAuthors = (list: Array<string>, stories: Array<Story>) => {
       stories.forEach((story: Story) => {
-        if(!list.includes(story.user)){
-          list.push(story.user);
+        if(!list.includes(story.user.username)){
+          list.push(story.user.username);
         }
       });
     }
@@ -59,7 +59,7 @@ export default defineComponent({
 
     const changeStory = (amount:number) => {
       // Find the index of the current story in the array
-      const curr_index = props.stories.findIndex((story: Story) => story.user == state.current_story_author)
+      const curr_index = props.stories.findIndex((story: Story) => story.user.username == state.current_story_author)
 
       const stories_len = props.stories.length;
       // Go to the next or previous story, if does not exist move to the last or first story respectively

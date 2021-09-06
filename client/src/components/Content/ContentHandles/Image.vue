@@ -7,7 +7,9 @@
         <div class="info">
             <p class="desc">{{ desc }}</p>
             <div class="author-info">
-                <div class="avatar"></div>
+                <div class="avatar-cont--small">
+                    <Avatar :user="user"></Avatar>
+                </div>
                 <a href="">@{{ user }}</a>
             </div>
         </div>
@@ -15,10 +17,14 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import Avatar from "../../User/Avatar.vue"
 
 export default defineComponent({
   name: "ImagePost",
   props: ["image", "user", "desc"],
+  components: {
+      Avatar
+  },
   setup(){
     const state = reactive({
         imageFound: true
@@ -94,5 +100,9 @@ export default defineComponent({
     height: 100%;
     object-fit: cover;
     border-radius: $radius $radius 0px 0px;
+}
+
+.avatar-cont--small{
+    margin-right: $avatar-margin;
 }
 </style>
