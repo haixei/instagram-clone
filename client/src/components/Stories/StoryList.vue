@@ -2,7 +2,7 @@
   <div class="image-post">
     <span class="section-header">Stories</span>
     <StoryCircle v-for="author in authors" :key="author" :author="author" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
-    <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="state.story"></StoryContent>
+    <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="state.story" :test="state.show_story"></StoryContent>
   </div>
 </template>
 
@@ -60,7 +60,6 @@ export default defineComponent({
     const changeStory = (amount:number) => {
       // Find the index of the current story in the array
       const curr_index = props.stories.findIndex((story: Story) => story.user == state.current_story_author)
-      console.log(curr_index, amount)
 
       const stories_len = props.stories.length;
       // Go to the next or previous story, if does not exist move to the last or first story respectively

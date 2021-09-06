@@ -28,5 +28,6 @@ export default defineComponent({
     border-radius: 100vw;
     background-color: #2c2c2c;
     cursor: pointer;
+    margin-right: 15px;
 }
 </style>
