@@ -38,5 +38,6 @@ export default defineComponent({
     justify-content: space-between;
     box-sizing: border-box;
     padding: 15px;
+    z-index: 888;
 }
 </style>

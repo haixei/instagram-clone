@@ -4,15 +4,17 @@
           <img src="@/assets/icons/comment.svg">
           <span>{{ comments.length }}</span>
       </div>
-      <div class="comment" v-for="comment in comments" :key="comment.id">
-          <div class="avatar-cont--small">
-              <Avatar :user="comment.user"></Avatar>
-          </div>
-          <p>{{ comment.content }}</p>
-          <div class="likes">
-              <span>{{ comment.likes }}</span>
-              <img src="@/assets/icons/heart.svg">
-          </div>
+      <div class="comment-list">
+          <div class="comment" v-for="comment in comments" :key="comment.id">
+            <div class="avatar-cont--small">
+                <Avatar :user="comment.user"></Avatar>
+            </div>
+            <p>{{ comment.content }}</p>
+            <div class="likes">
+                <span>{{ comment.likes }}</span>
+                <img src="@/assets/icons/heart.svg">
+            </div>
+        </div>
       </div>
       <button class="button button--black">
           <img src="@/assets/icons/pen.svg">
@@ -38,9 +40,31 @@ export default defineComponent({
 
 .comments{
     width: 100%;
-    max-height: 100%;
     box-sizing: border-box;
     padding: 0 0 0 20px;
+}
+
+.comment-list{
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.comment-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.comment-list::-webkit-scrollbar-track {
+  background: $white;
+}
+
+.comment-list::-webkit-scrollbar-thumb {
+  background: #9b9b9b;
+  border-radius: 50vw;
+  border: 3px solid $white;
+}
+
+.comment-list::-webkit-scrollbar-thumb:hover {
+  background: $black;
 }
 
 .comments-info{

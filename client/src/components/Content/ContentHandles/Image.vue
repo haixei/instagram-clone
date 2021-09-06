@@ -44,7 +44,6 @@ export default defineComponent({
 .image{
     width: 100%;
     margin: 0 40px;
-    height: 500px;
     background-color: #dfdfdf;
     border-radius: $radius $radius 10px 10px;
     position: relative;
@@ -52,7 +51,7 @@ export default defineComponent({
 
 .info{
     width: 100%;
-    height: 25%;
+    height: 130px;
     background-color: #fff;
     border-radius: 0px 0px $radius $radius;
     box-sizing: border-box;
@@ -89,14 +88,14 @@ export default defineComponent({
 }
 
 .img-box{
-    height: 85%;
+    height: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .found-image{
-    width: 100%;
+    width: 400px;
     height: 100%;
     object-fit: cover;
     border-radius: $radius $radius 0px 0px;
