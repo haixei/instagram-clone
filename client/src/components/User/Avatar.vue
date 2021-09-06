@@ -1,7 +1,7 @@
 <template>
     <div class="avatar">
         <img src="@/assets/icons/default-avatar.png" v-if="state.imageFound">
-        <img :src="user.username + '.jpg'" @error="notFound" v-if="!state.imageFound">
+        <img :src="user.avatar" @error="notFound" v-if="!state.imageFound">
     </div>
 </template>
 <script lang="ts">
