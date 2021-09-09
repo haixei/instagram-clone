@@ -18,7 +18,7 @@ export default defineComponent({
 
     function toggleModal(){
       emit('openStory', props.author)
-      emit('changeVisibility')
+      emit('changeVisibility', true)
     }
 
     return { toggleModal }

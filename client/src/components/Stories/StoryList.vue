@@ -52,9 +52,9 @@ export default defineComponent({
       state.current_story_author = author
     }
 
-   // Toggle the story card
-    const changeVisibility = () => {
-        state.show_story = !state.show_story;
+    // Toggle the story card
+    const changeVisibility = (option: boolean) => {
+        state.show_story = option;
     }
 
     const changeStory = (amount:number) => {
@@ -71,7 +71,7 @@ export default defineComponent({
       }
       else if(stories_len == 1){
         // Close the modal if we viewed the only story there and have nothing to loop
-        changeVisibility();
+        changeVisibility(false);
       }
       else{
         // Otherwise change the story

@@ -35,7 +35,7 @@ export default defineComponent({
     });
 
     function toggleModal(){
-      emit('changeVisibility')
+      emit('changeVisibility', false)
     }
 
     // Close the modal if there is no images in the story
@@ -108,7 +108,7 @@ export default defineComponent({
     height: 600px;
     padding: 15px;
     box-sizing: border-box;
-    background-color: #2c2c2c;
+    background-color: $black;
     border: none;
     border-radius: $radius;
     display: flex;
