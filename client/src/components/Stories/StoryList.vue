@@ -69,7 +69,7 @@ export default defineComponent({
       else if(curr_index == 0 && amount == -1 && stories_len > 1){
         state.current_story_author = props.stories[stories_len - 1].user
       }
-      else if(stories_len == 0){
+      else if(stories_len == 1){
         // Close the modal if we viewed the only story there and have nothing to loop
         changeVisibility();
       }
