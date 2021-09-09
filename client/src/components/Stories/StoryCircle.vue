@@ -1,11 +1,11 @@
 <template>
-  <div class="circle" @click="toggleModal">
+  <div class="circle" @click="toggleModal" v-bind:class="{ read: true }">
     <Avatar :user="author"></Avatar>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import Avatar from "../User/Avatar.vue"
 
 export default defineComponent({
@@ -21,7 +21,7 @@ export default defineComponent({
       emit('changeVisibility', true)
     }
 
-    return { toggleModal }
+    return { toggleModal}
   }
 });
 </script>
@@ -34,5 +34,10 @@ export default defineComponent({
     background-color: #2c2c2c;
     cursor: pointer;
     margin-right: 15px;
+    border: 2px solid #7803e6;
+}
+
+.read{
+  border-color: #797979;
 }
 </style>

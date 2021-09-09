@@ -1,7 +1,7 @@
 <template>
   <div class="image-post">
     <span class="section-header">Stories</span>
-    <StoryCircle v-for="author in authors" :key="author" :author="author" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
+    <StoryCircle v-for="story in stories" :key="story.user.username" :author="story.user.username" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
     <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="state.story" :test="state.show_story"></StoryContent>
   </div>
 </template>
@@ -25,26 +25,6 @@ export default defineComponent({
       show_story: false,
       current_story_author: '',
       story: computed(() => props.stories.find((story: Story) => story.user.username == state.current_story_author))
-    });
-
-    // Extract the authors
-    let authors:Array<string> = [];
-    
-    const updateAuthors = (list: Array<string>, stories: Array<Story>) => {
-      stories.forEach((story: Story) => {
-        if(!list.includes(story.user.username)){
-          list.push(story.user.username);
-        }
-      });
-    }
-
-    // Get the initial line of authors
-    updateAuthors(authors, props.stories);
-
-    // Watch for the change of the stories and update the authors if needed
-    watch(() => props.stories, (first, second) => {
-      // If the story changes, change to the first image of the new story
-      updateAuthors(authors, props.stories);
     });
 
     // Select a story to show
@@ -80,7 +60,7 @@ export default defineComponent({
     }
 
     // Make the property acessible before render so vue doesn't get angry
-    return { state, changeVisibility, openStory, authors, changeStory }
+    return { state, changeVisibility, openStory, changeStory }
   }
 });
 </script>
