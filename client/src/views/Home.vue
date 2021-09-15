@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <StoryList :stories="stories"></StoryList>
+    <StoryList></StoryList>
     <imagePost v-for="post in feed" :key="post.id" :post="post"></imagePost>
   </div>
 </template>
@@ -26,3 +26,8 @@ export default defineComponent({
   }
 });
 </script>
+<style scoped>
+.home{
+  margin-bottom: 40px;
+}
+</style>

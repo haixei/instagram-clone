@@ -1,7 +1,7 @@
 <template>
   <div class="image-post">
     <span class="section-header">Stories</span>
-    <StoryCircle v-for="story in stories" :key="story.user.username" :author="story.user.username" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
+    <StoryCircle v-for="story in state.stories" :key="story.user.username" :author="story.user.username" :read="story.read" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
     <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="state.story" :test="state.show_story"></StoryContent>
   </div>
 </template>
@@ -11,20 +11,30 @@ import { reactive, defineComponent, computed, watch } from "vue";
 import StoryCircle from "./StoryCircle.vue";
 import StoryContent from "./StoryContent.vue";
 import { Story } from "../../store/state"
+import { useStore } from "../../store/index"
 
 export default defineComponent({
   name: "ImagePost",
-  props: ["stories"],
   components: {
       StoryCircle,
       StoryContent
   },
   setup(props){
     // Create the state
-    const state = reactive({
+    const store = useStore();
+
+    interface storyState {
+      stories: Array<Story>,
+      show_story: boolean,
+      current_story_author: string,
+      story: Story | undefined
+    }
+
+    const state:storyState = reactive({
+      stories: store.getters.stories_data || [],
       show_story: false,
       current_story_author: '',
-      story: computed(() => props.stories.find((story: Story) => story.user.username == state.current_story_author))
+      story: computed(() => state.stories.find((story: Story) => story.user.username == state.current_story_author))
     });
 
     // Select a story to show
@@ -39,15 +49,15 @@ export default defineComponent({
 
     const changeStory = (amount:number) => {
       // Find the index of the current story in the array
-      const curr_index = props.stories.findIndex((story: Story) => story.user.username == state.current_story_author)
+      const curr_index = state.stories.findIndex((story: Story) => story.user.username == state.current_story_author)
 
-      const stories_len = props.stories.length;
+      const stories_len = state.stories.length;
       // Go to the next or previous story, if does not exist move to the last or first story respectively
       if(curr_index == stories_len - 1 && amount == 1 && stories_len > 1){
-        state.current_story_author = props.stories[0].user
+        state.current_story_author = state.stories[0].user.username
       }
       else if(curr_index == 0 && amount == -1 && stories_len > 1){
-        state.current_story_author = props.stories[stories_len - 1].user
+        state.current_story_author = state.stories[stories_len - 1].user.username
       }
       else if(stories_len == 1){
         // Close the modal if we viewed the only story there and have nothing to loop
@@ -55,7 +65,7 @@ export default defineComponent({
       }
       else{
         // Otherwise change the story
-        state.current_story_author = props.stories[curr_index + amount].user
+        state.current_story_author = state.stories[curr_index + amount].user.username
       }
     }
 
@@ -73,7 +83,7 @@ export default defineComponent({
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid $line;
-    height: 90px;
+    height: 80px;
 }
 
 .section-header{
