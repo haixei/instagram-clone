@@ -1,6 +1,6 @@
 <template>
     <div class="avatar">
-        <img src="@/assets/icons/default-avatar.png" v-if="state.imageFound">
+        <img src="@/assets/icons/default-avatar.svg" v-if="state.imageFound">
         <img :src="user.avatar" @error="notFound" v-if="!state.imageFound">
     </div>
 </template>
@@ -11,7 +11,7 @@ export default defineComponent({
   name: "Avatar",
   props: ["user"],
   setup(){
-      const state = reactive({
+    const state = reactive({
         imageFound: true
     });
 
@@ -30,10 +30,10 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     border-radius: 50vw;
+    overflow: hidden;
     img{
         width: 100%;
         height: 100%;
-        border-radius: 50vw;
     }
 }
 </style>

@@ -82,5 +82,33 @@ export const state: State = {
         tags: ['coolbeach', 'ilikethesun'],
         desc: 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
         id: '032'
-    }]
+    }, {
+        user: {
+            user: 39,
+            username: 'user3',
+            followers: [],
+            following: [],
+            bio: '',
+            created: '22/22/2222',
+            avatar: null
+        },
+        comments: [{
+            user: {
+                user: 33,
+                username: 'user2',
+                followers: [],
+                following: [],
+                bio: '',
+                created: '22/22/2222',
+                avatar: null
+            },
+            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
+            likes: 22,
+            id: '012'
+        }],
+        image: 'https://images.unsplash.com/photo-15793371862546556456',
+        tags: ['coolbeach', 'ilikethesun'],
+        desc: 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
+        id: '032'
+    },]
 }

@@ -78,7 +78,7 @@ export default defineComponent({
         margin-left: 10px;
     }
     img{
-        width: 25px;
+        width: 20px;
     }
 }
 
@@ -98,8 +98,6 @@ button{
         max-width: 300px;
         width: 70%;
         margin: 0;
-        font-size: 0.9em;
-        line-height: 1.3em;
     }
 }
 

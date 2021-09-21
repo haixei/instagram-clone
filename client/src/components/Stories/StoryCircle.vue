@@ -42,17 +42,20 @@ export default defineComponent({
 </script>
 
 <style scoped lang='scss'>
+@import "@/assets/scss/main.scss";
+
 .circle{
     width: 40px;
     height: 40px;
-    border-radius: 100vw;
-    background-color: #2c2c2c;
+    border-radius: 50vw;
+    background-color: transparent;
     cursor: pointer;
     margin-right: 15px;
-    border: 2px solid #7803e6;
+    border: 2px solid $main;
+    transition: all 0.5s;
 }
 
 .read{
-  border-color: #797979;
+  border-color: #e6e6e6;
 }
 </style>

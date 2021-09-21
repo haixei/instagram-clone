@@ -1,13 +1,14 @@
 // Misc. Variables
 $radius: 6px;
 $radius--btn: 3px;
-$avatar-margin: 15px;
+$avatar-margin: 14px;
 
 // Palette
 $black: #161616;
 $white: #F5F5F5;
 $lightgray: #f3f3f3;
 $gray: #686868;
+$mediumgray: #c5c5c5;
 $line: #dddddd;
 $main: #5200FF;
 
@@ -26,15 +27,17 @@ $main: #5200FF;
 body{
     background: $white;
     min-height: 100vh;
-    padding: 0;
-    margin: 150px 0 0 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 170px 0 0 0;
     color: #141414;
     font-family: "Halvetica", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 1em;
 }
 
-.home, .login{
+.home, .login, .profile{
     width: 55%;
     margin: 0 auto;
 }
@@ -48,6 +51,12 @@ h1{
 a{
     color: $main;
     text-decoration: none;
+}
+
+// Paragraphs
+p{
+    font-size: 0.9em;
+    line-height: 1.3em;
 }
 
 // Buttons
@@ -103,6 +112,12 @@ a{
     background-color: lighten($black, 15%);
 }
 
+.button--lined{
+    background-color: transparent;
+    border: 1px solid $mediumgray;
+    color: $black;
+}
+
 // Wrappers
 .button-wrapper{
     display: flex;
@@ -112,10 +127,6 @@ a{
     }
 }
 
-// Icons
-.insta-logo{
-    height: 28px;
-}
 
 // Styling sections
 .section-header{
@@ -138,4 +149,9 @@ span{
 .avatar-cont--small{
     width: 24px;
     height: 24px;
+}
+
+.avatar-cont--big{
+    width: 40px;
+    height: 40px;
 }

@@ -44,6 +44,7 @@ export default defineComponent({
 .tag{
   width: 100%;
   color: $black;
+  line-height: 1.2em;
 }
 
 </style>

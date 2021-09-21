@@ -83,7 +83,8 @@ export default defineComponent({
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid $line;
-    height: 80px;
+    height: auto;
+    padding-bottom: 30px;
 }
 
 .section-header{

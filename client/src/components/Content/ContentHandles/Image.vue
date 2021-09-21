@@ -73,15 +73,11 @@ export default defineComponent({
     position: absolute;
     bottom: 0;
     margin-bottom: 20px;
+    a{
+        margin-bottom: -1px;
+    }
 }
 
-.avatar{
-    width: 24px;
-    height: 24px;
-    background-color: $black;
-    border-radius: 50vw;
-    margin-right: 15px;
-}
 
 .not-found{
     width: 40px;
