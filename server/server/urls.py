@@ -19,8 +19,8 @@ urlpatterns = [
     path('api/', include(router.urls)),
 
     # Custom paths
-    re_path(r'^api/postedimages/getFeed/(?P<username>.+)$',
-            PostedImageView.as_view({'get': 'get_feed'})),
+    re_path(r'^api/profiles/getFeed/(?P<username>.+)$',
+            ProfileView.as_view({'get': 'get_feed'})),
     re_path(r'^api/postedimages/hashtag/(?P<hashtag>.+)$',
             PostedImageView.as_view({'get': 'get_feed_from_hashtag'})),
     re_path(r'^api/userstories/username/(?P<username>.+)$',

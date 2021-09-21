@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import Profile, Comment, PostedImage, UserStory
 from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 
 class ProfileView(viewsets.ModelViewSet):
@@ -13,11 +15,20 @@ class ProfileView(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
 
     @extend_schema(
-        request=PostedImageSerializer,
-        responses=PostedImageSerializer,
+        request=ProfileSerializer,
+        responses=ProfileSerializer,
     )
+    def retrieve(self, request):
+        session = Session.objects.get(session_key=request.session.session_key)
+        session_data = session.get_decoded()
+        uid = session_data.get('_auth_user_id')
+        user = Profile.objects.filter(user_id=uid)
+        print(user)
+
+        serializer = self.serializer_class(user, many=True)
+        return Response(serializer.data)
+
     def get_feed(self, request, username):
-        print('test')
         profile = Profile.objects.get(username=username)
         followed = profile.following.values_list('username', flat=True)
         images = PostedImage.objects.filter(author__username__in=followed)

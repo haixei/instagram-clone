@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@nuxt/content": "^1.14.0",
     "vuex": "^4.0.2"
   }
 }

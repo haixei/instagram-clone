@@ -11,7 +11,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=100, blank=True, default='')
     created = models.DateField(default=timezone.now(), blank=True)
     following = models.ManyToManyField('self', blank=True, related_name='followedby', symmetrical=False)
-    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True, default="default.jpg")
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     @property

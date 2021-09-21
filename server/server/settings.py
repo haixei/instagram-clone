@@ -55,7 +55,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Authentication settings
-SITE_ID = 4
+SITE_ID = 5
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
