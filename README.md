@@ -1,5 +1,4 @@
-![In works](https://i.imgur.com/mkBGAdj.png)
-![Web Full-Stack](https://i.imgur.com/meB7aiP.png)
+![In works](https://i.imgur.com/eVFsNyu.png)
 
 # Instagram Clone
 
