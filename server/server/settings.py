@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'way',
+    'instagram',
     'rest_framework',
     'corsheaders',
     # Documentation generator
@@ -55,7 +55,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Authentication settings
-SITE_ID = 5
+SITE_ID = 6
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

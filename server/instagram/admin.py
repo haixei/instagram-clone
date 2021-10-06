@@ -18,6 +18,7 @@ class PostedImageAdmin(admin.ModelAdmin):
 
 
 class UserStoryAdmin(admin.ModelAdmin):
+    filter_horizontal = ('seen_by',)
     list_display = ('created', 'author', 'image')
 
 

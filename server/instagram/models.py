@@ -66,3 +66,4 @@ class UserStory(models.Model):
         on_delete=models.CASCADE,
     )
     image = models.ImageField(upload_to='stories', blank=True, null=True)
+    seen_by = models.ManyToManyField(User, blank=True, related_name='seen_stories', symmetrical=False)

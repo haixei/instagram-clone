@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Profile, Comment, PostedImage, UserStory
 
 
-
 class ProfileFollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -49,6 +48,7 @@ class PostedImageSerializer(serializers.ModelSerializer):
 
 class UserStorySerializer(serializers.ModelSerializer):
     author = ActionAuthorSerializer()
+    seen = ActionAuthorSerializer(read_only=True, many=True)
 
     class Meta:
         model = UserStory
