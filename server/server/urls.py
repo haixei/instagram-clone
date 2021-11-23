@@ -10,8 +10,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 router = routers.DefaultRouter()
 router.register(r'comments', CommentView, 'comment')
-router.register(r'profiles', ProfileView, 'profile')
-router.register(r'userstories', UserStoryView, 'userstory')
+router.register(r'profiles', ProfilePublicView, 'profile')
+router.register(r'profilesadmin', ProfileAdminView, 'profileadmin')
+router.register(r'stories', UserStoryView, 'story')
 router.register(r'postedimages', PostedImageView, 'postedimage')
 
 urlpatterns = [
@@ -23,6 +24,10 @@ urlpatterns = [
             PostedImageView.as_view({'get': 'get_feed_from_hashtag'})),
     re_path(r'^api/userstories/username/(?P<username>.+)$',
             UserStoryView.as_view({'get': 'get_stories'})),
+    re_path(r'^api/profiles/username/(?P<username>.+)$',
+            ProfilePublicView.as_view({'get': 'get_by_username'})),
+    re_path(r'^api/stories/username/(?P<username>.+)$',
+            UserStoryView.as_view({'get': 'get_by_username'})),
 
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
