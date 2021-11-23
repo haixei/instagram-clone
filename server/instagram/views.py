@@ -1,44 +1,96 @@
 # Custom schema support
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets
-from .permissions import IsAdminOrReadOnly
+from rest_framework import viewsets, status
+from .permissions import *
 from rest_framework.response import Response
 from .models import Profile, Comment, PostedImage, UserStory
-from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer
+from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer, ProfilePublicSerializer
 from django.contrib.sessions.models import Session
 from rest_framework.decorators import action
 
-
-class ProfileView(viewsets.ModelViewSet):
+# Admin views that can interact with any route in the API
+class ProfileAdminView(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminUser]
+
+
+class CommentAdminView(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+# Public API that can be used by anyone
+class ProfilePublicView(viewsets.ModelViewSet):
+    serializer_class = ProfilePublicSerializer
+    queryset = Profile.objects.all()
+    permission_classes = [IsOwnerOrReadOnly]
 
     @extend_schema(
-        request=ProfileSerializer,
-        responses=ProfileSerializer,
+        request=ProfilePublicSerializer,
+        responses=ProfilePublicSerializer,
         description='This route responds with the data of the user signed in with the session id passed in the request.'
     )
-    @action(detail=False, methods=['GET'], name='sessionUser')
-    def get_session_user(self, request):
-        session = Session.objects.get(session_key=request.session.session_key)
-        session_data = session.get_decoded()
-        uid = session_data.get('_auth_user_id')
+    def retrieve(self, request, *args, **kwargs):
+        return Response('Non-admins can only retrieve users by their username. Try /profiles/username/{username}',
+                        status=403)
 
-        user = Profile.objects.filter(user_id=uid)
-        serializer = self.serializer_class(user, many=True)
-        return Response(serializer.data)
+    def list(self, request, *args, **kwargs):
+        return Response('Route forbidden, non-admins cannot retrieve all the users. Please search by the username '
+                        'instead.',
+                        status=403)
+
+    def get_by_username(self, request, username):
+        # Try to retrieve the user, proceed if found otherwise return a 404 status
+        try:
+            requested_user = Profile.objects.get(username=username)
+            print(requested_user)
+        except Profile.DoesNotExist:
+            Response('User not found.',
+                     status=404)
+
+        # Get the user id of the user who requested the data from the session, if the session
+        # doesn't exist, do not update the value
+        uid = -1
+        if request.session.session_key is not None:
+            session = Session.objects.get(session_key=request.session.session_key)
+            session_data = session.get_decoded()
+            uid = session_data.get('_auth_user_id')
+
+        # Convert the uid to an int so its comparable with requested user id
+        try:
+            uid = int(uid)
+        except ValueError:
+            return Response(status=500)
+
+        # Return profile in a public mode if the user is not the owner of the profile
+        if (uid == -1) or (uid != requested_user.user.id):
+            serializer = self.get_serializer(requested_user)
+            return Response(serializer.data)
+        # Return in private mode
+        else:
+            serializer = ProfileSerializer(requested_user)
+            return Response(serializer.data)
 
 
 class CommentView(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
 
+    def list(self, request, *args, **kwargs):
+        return Response('You cannot list all the comments.',
+                        status=403)
+
 
 class PostedImageView(viewsets.ModelViewSet):
     serializer_class = PostedImageSerializer
     queryset = PostedImage.objects.all()
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def list(self, request, *args, **kwargs):
+        return Response('You cannot list all the images.',
+                        status=403)
 
     @extend_schema(
         request=PostedImageSerializer,
@@ -53,34 +105,54 @@ class PostedImageView(viewsets.ModelViewSet):
     @extend_schema(
         request=PostedImageSerializer,
         responses=PostedImageSerializer,
-        description='The feed is a list of all found images that were uploaded by users who the currently logged in user follows.'
+        description='The feed is a list of all found images that were uploaded by users who the currently logged in '
+                    'user follows.'
     )
     @action(detail=False, methods=['GET'], name='feed')
     def feed(self, request):
-        session = Session.objects.get(session_key=request.session.session_key)
-        session_data = session.get_decoded()
-        uid = session_data.get('_auth_user_id')
+        if request.session.session_key is not None:
+            session = Session.objects.get(session_key=request.session.session_key)
+            session_data = session.get_decoded()
+            uid = session_data.get('_auth_user_id')
 
-        profile = Profile.objects.get(user_id=uid)
-        followed = profile.following.values_list('username', flat=True)
-        images = PostedImage.objects.filter(author__username__in=followed)
-        serializer = self.serializer_class(images, many=True)
-        return Response(serializer.data)
+            profile = Profile.objects.get(user_id=uid)
+            followed = profile.following.values_list('username', flat=True)
+            images = PostedImage.objects.filter(author__username__in=followed)
+            serializer = self.serializer_class(images, many=True)
+            return Response(serializer.data)
+        else:
+            return Response('Log in to see your feed.',
+                            status=403)
 
 
 class UserStoryView(viewsets.ModelViewSet):
     serializer_class = UserStorySerializer
     queryset = UserStory.objects.all()
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
-    @extend_schema(
-        request=UserStorySerializer,
-        responses=UserStorySerializer,
-        description='Stories are all groups of images that were uploaded by users who the currently logged in user follows.'
-    )
-    def get_stories(self, request, username):
-        profile = Profile.objects.get(username=username)
-        followed = profile.following.values_list('username', flat=True)
-        stories = UserStory.objects.filter(author__username__in=followed)
-        serializer = self.serializer_class(stories, many=True)
-        return Response(serializer.data)
+    def retrieve(self, request, *args, **kwargs):
+        return Response('You can only retrieve stories by the username. Try /stories/username/{username}.',
+                        status=403)
+
+    def get_by_username(self, request, username):
+        try:
+            stories = UserStory.objects.filter(author__username=username)
+            serializer = self.serializer_class(stories, many=True)
+            return Response(serializer.data)
+        except UserStory.DoesNotExist:
+            Response(status=404)
+
+    def list(self, request, *args, **kwargs):
+        if request.session.session_key is not None:
+            session = Session.objects.get(session_key=request.session.session_key)
+            session_data = session.get_decoded()
+            uid = session_data.get('_auth_user_id')
+
+            profile = Profile.objects.get(user_id=uid)
+            followed = profile.following.values_list('username', flat=True)
+            stories = UserStory.objects.filter(author__username__in=followed)
+            serializer = self.serializer_class(stories, many=True)
+            return Response(serializer.data)
+        else:
+            return Response('Log in to see a list of stories from the people you follow.',
+                            status=403)
