@@ -14,7 +14,8 @@ services:
       - "db"
     volumes:
       - ./server:/app
-      - migrations:/app/way/migrations
+      - migrations:/app/instagram/migrations
+      - media:/app/media/
   client:
     image: client
     build:
@@ -37,4 +38,5 @@ services:
 volumes:
   datapg:
   migrations:
+  media:
 
