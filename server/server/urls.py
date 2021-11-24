@@ -9,11 +9,17 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 # from django.contrib.auth.views import LogoutView
 
 router = routers.DefaultRouter()
+# Public API
 router.register(r'comments', CommentView, 'comment')
 router.register(r'profiles', ProfilePublicView, 'profile')
-router.register(r'profilesadmin', ProfileAdminView, 'profileadmin')
 router.register(r'stories', UserStoryView, 'story')
 router.register(r'postedimages', PostedImageView, 'postedimage')
+
+# Admin API
+router.register(r'profilesadmin', ProfileAdminView, 'profileadmin')
+router.register(r'commentsadmin', CommentAdminView, 'commentadmin')
+router.register(r'postedimagesadmin', PostedImageAdminView, 'postedimageadmin')
+router.register(r'storiesadmin', UserStoryAdminView, 'storyadmin')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,8 +28,6 @@ urlpatterns = [
     # Custom paths
     re_path(r'^api/postedimages/hashtag/(?P<hashtag>.+)$',
             PostedImageView.as_view({'get': 'get_feed_from_hashtag'})),
-    re_path(r'^api/userstories/username/(?P<username>.+)$',
-            UserStoryView.as_view({'get': 'get_stories'})),
     re_path(r'^api/profiles/username/(?P<username>.+)$',
             ProfilePublicView.as_view({'get': 'get_by_username'})),
     re_path(r'^api/stories/username/(?P<username>.+)$',
