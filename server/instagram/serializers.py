@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Profile, Comment, PostedImage, UserStory
 
+# Fields that should be visible to anyone who fetches user profile in a public mode
 public_access_fields = ('username', 'bio', 'following', 'avatar')
 
 
