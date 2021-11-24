@@ -1,12 +1,14 @@
 # Custom schema support
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets, status
+from rest_framework import viewsets
+from .customviewsets import UpdateDestroyViewSet, UpdateDestroyCreateViewSet, NoListViewSet
 from .permissions import *
 from rest_framework.response import Response
 from .models import Profile, Comment, PostedImage, UserStory
 from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer, ProfilePublicSerializer
 from django.contrib.sessions.models import Session
 from rest_framework.decorators import action
+
 
 # Admin views that can interact with any route in the API
 class ProfileAdminView(viewsets.ModelViewSet):
@@ -21,8 +23,20 @@ class CommentAdminView(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
 
 
+class PostedImageAdminView(viewsets.ModelViewSet):
+    serializer_class = PostedImageSerializer
+    queryset = PostedImage.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+class UserStoryAdminView(viewsets.ModelViewSet):
+    serializer_class = UserStorySerializer
+    queryset = UserStory.objects.all()
+    permission_classes = [IsAdminUser]
+
+
 # Public API that can be used by anyone
-class ProfilePublicView(viewsets.ModelViewSet):
+class ProfilePublicView(UpdateDestroyViewSet):
     serializer_class = ProfilePublicSerializer
     queryset = Profile.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
@@ -30,17 +44,9 @@ class ProfilePublicView(viewsets.ModelViewSet):
     @extend_schema(
         request=ProfilePublicSerializer,
         responses=ProfilePublicSerializer,
-        description='This route responds with the data of the user signed in with the session id passed in the request.'
+        description='This route allows you to fetch a user by their username. If you own the data, it displays'
+        'in private mode.'
     )
-    def retrieve(self, request, *args, **kwargs):
-        return Response('Non-admins can only retrieve users by their username. Try /profiles/username/{username}',
-                        status=403)
-
-    def list(self, request, *args, **kwargs):
-        return Response('Route forbidden, non-admins cannot retrieve all the users. Please search by the username '
-                        'instead.',
-                        status=403)
-
     def get_by_username(self, request, username):
         # Try to retrieve the user, proceed if found otherwise return a 404 status
         try:
@@ -74,23 +80,15 @@ class ProfilePublicView(viewsets.ModelViewSet):
             return Response(serializer.data)
 
 
-class CommentView(viewsets.ModelViewSet):
+class CommentView(NoListViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
 
-    def list(self, request, *args, **kwargs):
-        return Response('You cannot list all the comments.',
-                        status=403)
 
-
-class PostedImageView(viewsets.ModelViewSet):
+class PostedImageView(NoListViewSet):
     serializer_class = PostedImageSerializer
     queryset = PostedImage.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
-
-    def list(self, request, *args, **kwargs):
-        return Response('You cannot list all the images.',
-                        status=403)
 
     @extend_schema(
         request=PostedImageSerializer,
@@ -125,14 +123,10 @@ class PostedImageView(viewsets.ModelViewSet):
                             status=403)
 
 
-class UserStoryView(viewsets.ModelViewSet):
+class UserStoryView(UpdateDestroyCreateViewSet):
     serializer_class = UserStorySerializer
     queryset = UserStory.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
-
-    def retrieve(self, request, *args, **kwargs):
-        return Response('You can only retrieve stories by the username. Try /stories/username/{username}.',
-                        status=403)
 
     def get_by_username(self, request, username):
         try:
@@ -142,7 +136,8 @@ class UserStoryView(viewsets.ModelViewSet):
         except UserStory.DoesNotExist:
             Response(status=404)
 
-    def list(self, request, *args, **kwargs):
+    @action(detail=False, methods=['GET'], name='list_following')
+    def list_following(self, request, *args, **kwargs):
         if request.session.session_key is not None:
             session = Session.objects.get(session_key=request.session.session_key)
             session_data = session.get_decoded()
