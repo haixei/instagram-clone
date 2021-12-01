@@ -1,7 +1,7 @@
 # Custom schema support
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
-from .customviewsets import UpdateDestroyViewSet, UpdateDestroyCreateViewSet, NoListViewSet
+from .customviewsets import UpdateDestroyViewSet, DestroyCreateViewSet, NoListViewSet
 from .permissions import *
 from rest_framework.response import Response
 from .models import Profile, Comment, PostedImage, UserStory
@@ -10,32 +10,6 @@ from django.contrib.sessions.models import Session
 from rest_framework.decorators import action
 
 
-# Admin views that can interact with any route in the API
-class ProfileAdminView(viewsets.ModelViewSet):
-    serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
-    permission_classes = [IsAdminUser]
-
-
-class CommentAdminView(viewsets.ModelViewSet):
-    serializer_class = CommentSerializer
-    queryset = Comment.objects.all()
-    permission_classes = [IsAdminUser]
-
-
-class PostedImageAdminView(viewsets.ModelViewSet):
-    serializer_class = PostedImageSerializer
-    queryset = PostedImage.objects.all()
-    permission_classes = [IsAdminUser]
-
-
-class UserStoryAdminView(viewsets.ModelViewSet):
-    serializer_class = UserStorySerializer
-    queryset = UserStory.objects.all()
-    permission_classes = [IsAdminUser]
-
-
-# Public API that can be used by anyone
 class ProfilePublicView(UpdateDestroyViewSet):
     serializer_class = ProfilePublicSerializer
     queryset = Profile.objects.all()
@@ -53,8 +27,8 @@ class ProfilePublicView(UpdateDestroyViewSet):
             requested_user = Profile.objects.get(username=username)
             print(requested_user)
         except Profile.DoesNotExist:
-            Response('User not found.',
-                     status=404)
+            return Response('User not found.',
+                            status=404)
 
         # Get the user id of the user who requested the data from the session, if the session
         # doesn't exist, do not update the value
@@ -93,6 +67,28 @@ class PostedImageView(NoListViewSet):
     @extend_schema(
         request=PostedImageSerializer,
         responses=PostedImageSerializer,
+    )
+    def create(self, request, *args, **kwargs):
+        # Allow access only to people who are currently logged in
+        if request.session.session_key is not None:
+            # If the image author matches the logged in user, create the picture
+            session = Session.objects.get(session_key=request.session.session_key)
+            session_data = session.get_decoded()
+            uid = session_data.get('_auth_user_id')
+            if uid == request.data['author']:
+                serializer = self.get_serializer(data=request.data)
+                serializer.is_valid(raise_exception=True)
+                self.perform_create(serializer)
+                headers = self.get_success_headers(serializer.data)
+                return Response(serializer.data, status=201, headers=headers)
+            else:
+                return Response('You are not authorized to post an image for that user.', status=403)
+        else:
+            return Response('Log in to post an image.', status=403)
+
+    @extend_schema(
+        request=PostedImageSerializer,
+        responses=PostedImageSerializer,
         description='Sometimes we need to get more specific. This route finds all images with a specified hashtag.'
     )
     def get_feed_from_hashtag(self, request, hashtag):
@@ -123,10 +119,32 @@ class PostedImageView(NoListViewSet):
                             status=403)
 
 
-class UserStoryView(UpdateDestroyCreateViewSet):
+class UserStoryView(DestroyCreateViewSet):
     serializer_class = UserStorySerializer
     queryset = UserStory.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
+
+    @extend_schema(
+        request=PostedImageSerializer,
+        responses=PostedImageSerializer,
+    )
+    def create(self, request, *args, **kwargs):
+        # Allow access only to people who are currently logged in
+        if request.session.session_key is not None:
+            # If the image author matches the logged in user, create the picture
+            session = Session.objects.get(session_key=request.session.session_key)
+            session_data = session.get_decoded()
+            uid = session_data.get('_auth_user_id')
+            if uid == request.data['author']:
+                serializer = self.get_serializer(data=request.data)
+                serializer.is_valid(raise_exception=True)
+                self.perform_create(serializer)
+                headers = self.get_success_headers(serializer.data)
+                return Response(serializer.data, status=201, headers=headers)
+            else:
+                return Response('You are not authorized to post a story for that user.', status=403)
+        else:
+            return Response('Log in to post a story.', status=403)
 
     def get_by_username(self, request, username):
         try:
@@ -134,7 +152,7 @@ class UserStoryView(UpdateDestroyCreateViewSet):
             serializer = self.serializer_class(stories, many=True)
             return Response(serializer.data)
         except UserStory.DoesNotExist:
-            Response(status=404)
+            return Response(status=404)
 
     @action(detail=False, methods=['GET'], name='list_following')
     def list_following(self, request, *args, **kwargs):

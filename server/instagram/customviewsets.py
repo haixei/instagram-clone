@@ -7,10 +7,9 @@ class UpdateDestroyViewSet(mixins.UpdateModelMixin,
     pass
 
 
-class UpdateDestroyCreateViewSet(mixins.UpdateModelMixin,
-                                 mixins.DestroyModelMixin,
-                                 mixins.CreateModelMixin,
-                                 viewsets.GenericViewSet):
+class DestroyCreateViewSet(mixins.DestroyModelMixin,
+                           mixins.CreateModelMixin,
+                           viewsets.GenericViewSet):
     pass
 
 
