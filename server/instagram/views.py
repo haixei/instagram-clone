@@ -8,6 +8,7 @@ from .models import Profile, Comment, PostedImage, UserStory
 from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer, ProfilePublicSerializer
 from django.contrib.sessions.models import Session
 from rest_framework.decorators import action
+from .custommixins import CreateAuthorization
 
 
 class ProfilePublicView(UpdateDestroyViewSet):
@@ -59,32 +60,10 @@ class CommentView(NoListViewSet):
     queryset = Comment.objects.all()
 
 
-class PostedImageView(NoListViewSet):
+class PostedImageView(CreateAuthorization, NoListViewSet):
     serializer_class = PostedImageSerializer
     queryset = PostedImage.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
-
-    @extend_schema(
-        request=PostedImageSerializer,
-        responses=PostedImageSerializer,
-    )
-    def create(self, request, *args, **kwargs):
-        # Allow access only to people who are currently logged in
-        if request.session.session_key is not None:
-            # If the image author matches the logged in user, create the picture
-            session = Session.objects.get(session_key=request.session.session_key)
-            session_data = session.get_decoded()
-            uid = session_data.get('_auth_user_id')
-            if uid == request.data['author']:
-                serializer = self.get_serializer(data=request.data)
-                serializer.is_valid(raise_exception=True)
-                self.perform_create(serializer)
-                headers = self.get_success_headers(serializer.data)
-                return Response(serializer.data, status=201, headers=headers)
-            else:
-                return Response('You are not authorized to post an image for that user.', status=403)
-        else:
-            return Response('Log in to post an image.', status=403)
 
     @extend_schema(
         request=PostedImageSerializer,
@@ -119,33 +98,16 @@ class PostedImageView(NoListViewSet):
                             status=403)
 
 
-class UserStoryView(DestroyCreateViewSet):
+class UserStoryView(CreateAuthorization, DestroyCreateViewSet):
     serializer_class = UserStorySerializer
     queryset = UserStory.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
 
     @extend_schema(
-        request=PostedImageSerializer,
-        responses=PostedImageSerializer,
+        request=UserStorySerializer,
+        responses=UserStorySerializer,
+        description='Access all stories that belong to a user by their username.'
     )
-    def create(self, request, *args, **kwargs):
-        # Allow access only to people who are currently logged in
-        if request.session.session_key is not None:
-            # If the image author matches the logged in user, create the picture
-            session = Session.objects.get(session_key=request.session.session_key)
-            session_data = session.get_decoded()
-            uid = session_data.get('_auth_user_id')
-            if uid == request.data['author']:
-                serializer = self.get_serializer(data=request.data)
-                serializer.is_valid(raise_exception=True)
-                self.perform_create(serializer)
-                headers = self.get_success_headers(serializer.data)
-                return Response(serializer.data, status=201, headers=headers)
-            else:
-                return Response('You are not authorized to post a story for that user.', status=403)
-        else:
-            return Response('Log in to post a story.', status=403)
-
     def get_by_username(self, request, username):
         try:
             stories = UserStory.objects.filter(author__username=username)
@@ -154,6 +116,12 @@ class UserStoryView(DestroyCreateViewSet):
         except UserStory.DoesNotExist:
             return Response(status=404)
 
+    @extend_schema(
+        request=UserStorySerializer,
+        responses=UserStorySerializer,
+        description='This route returns all the stories that belong to people the user follows. One needs'
+                    'to be authorized to access this route.'
+    )
     @action(detail=False, methods=['GET'], name='list_following')
     def list_following(self, request, *args, **kwargs):
         if request.session.session_key is not None:
