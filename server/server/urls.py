@@ -1,10 +1,11 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
 from rest_framework import routers
 from instagram.views import *
-from django.conf.urls.static import static
-from django.conf import settings
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
 # Add the logout view later
 # from django.contrib.auth.views import LogoutView
 
@@ -15,11 +16,6 @@ router.register(r'profiles', ProfilePublicView, 'profile')
 router.register(r'stories', UserStoryView, 'story')
 router.register(r'postedimages', PostedImageView, 'postedimage')
 
-# Admin API
-router.register(r'profilesadmin', ProfileAdminView, 'profileadmin')
-router.register(r'commentsadmin', CommentAdminView, 'commentadmin')
-router.register(r'postedimagesadmin', PostedImageAdminView, 'postedimageadmin')
-router.register(r'storiesadmin', UserStoryAdminView, 'storyadmin')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
