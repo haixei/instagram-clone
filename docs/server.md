@@ -32,7 +32,7 @@ If you follow all the instructions from the project's README file, you are good 
 
 *"But it runs on my PC! Well.. let's just ship my PC."*
 
-Docker is an open source containerization platform and is used in this project to create separate environments for parts of the application. To understand how it works, please visit this link. It's also important that you understand the concept of images and volume mounting, all of which are used for this project.
+Docker is an open source containerization platform and is used in this project to create separate environments for parts of the application. To understand how it works, please visit [this link](https://docs.docker.com/get-started/). It's also important that you understand the concept of images and volume mounting, all of which are used for this project.
 
 
 
@@ -170,7 +170,7 @@ admin.site.register(Profile, ProfileAdmin)
 
 ## 4. PostgreSQL
 
-This project is using PostgreSQL database, it's SQL syntax conforming and highly stable, backed by more than 20 years of development. Docker is using an official image of it, so you don't have to worry about installation. The user and the database are created using information from the .env file.
+This project is using PostgreSQL database, it's SQL syntax conforming and highly stable, backed by more than 20 years of development. Docker is using an official image of it, so you don't have to worry about installation. The user and the database are created using information from the .env file. If you wish to learn more about PostgreSQL visit the [about page](https://www.postgresql.org/about/) of its documentation.
 
 
 
@@ -182,7 +182,7 @@ The application does not have a login form included but is using an OAuth to aut
 
 ## 6. Additional in-code documentation
 
-To enrich the API documentation generated with Redoc, I decided to use DRF Spectacular. It's a simple way to describe responses and add more specific messages to the views.
+To enrich the API documentation generated with Redoc, I decided to use [DRF Spectacular](https://github.com/tfranzel/drf-spectacular). It's a simple way to describe responses and add more specific messages to the views.
 
 ```python
 # Example from the library documentation
