@@ -1,4 +1,5 @@
-![In works](https://i.imgur.com/eVFsNyu.png)
+![](https://img.shields.io/badge/Status-In%20development-navy)
+![](https://img.shields.io/badge/License-MIT-%23f3e3ff)
 
 # Instagram Clone
 
@@ -6,9 +7,9 @@ This project is a full-stack application made with Django and Vue that imitates 
 
 
 
-- [*Documentation*](https://github.com/haixei/instagram-clone/blob/master/docs/docs.md)
-- [*Developer API reference*](https://haixei.github.io/instagram-clone/)
-- *Live website (in development)* 🛠
+- [*Server-side documentation*](https://github.com/haixei/instagram-clone/blob/master/docs/server.md)
+- [*Client-side documentation*](https://github.com/haixei/instagram-clone/blob/master/docs/client.md)
+- *Live website (not deployed)* 🛠
 
 
 
@@ -67,5 +68,5 @@ docker-compose up -d
 
 ## Contribute
 
-This project serves only an educational purpose, but contributions related to improving the quality of the code are very much welcome. The app in the future could serve as a resource for people who want to learn more about Django or Vue.
+This project serves only an educational purpose, but contributions related to improving the quality of the code are very much welcome. In the future, this proejct could serve as a resource for people who want to learn more about Django or Vue.
 
