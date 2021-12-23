@@ -51,7 +51,7 @@ export default defineComponent({
     background-color: transparent;
     cursor: pointer;
     margin-right: 15px;
-    border: 2px solid $main;
+    border: 3px solid $main;
     transition: all 0.5s;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="image-post">
+  <div class="storylist">
     <span class="section-header">Stories</span>
     <StoryCircle v-for="story in state.stories" :key="story.user.username" :author="story.user.username" :read="story.read" @changeVisibility="changeVisibility" @openStory="openStory"></StoryCircle>
     <StoryContent v-if="state.show_story" @changeVisibility="changeVisibility" @changeStory="changeStory" :story="state.story" :test="state.show_story"></StoryContent>
@@ -78,7 +78,7 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "@/assets/scss/main.scss";
 
-.image-post{
+.storylist{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -89,5 +89,12 @@ export default defineComponent({
 
 .section-header{
     margin-right: 20px;
+}
+
+@media(max-width: 1100px) {
+    .storylist{
+        width: 450px;
+        margin: 0 auto;
+    }
 }
 </style>

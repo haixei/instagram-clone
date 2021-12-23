@@ -12,7 +12,7 @@
                     <div class="inside-line" v-bind:class="{ active: state.current_image == image}"></div>
                 </div>
             </div>
-            <span>{{ state.current_image }}</span>
+            <!-- <span>{{ state.current_image }}</span> -->
         </div>
     </div>
 </template>
@@ -104,8 +104,8 @@ export default defineComponent({
 
 .image{
     position: fixed;
-    width: 340px;
-    height: 600px;
+    width: 390px;
+    height: 700px;
     padding: 15px;
     box-sizing: border-box;
     background-color: $black;
@@ -178,6 +178,10 @@ img:hover{
 
 .active{
     animation: timeTransition 2s ease-in-out;
+}
+
+.author{
+    color: $lightgray;
 }
 
 @keyframes timeTransition {

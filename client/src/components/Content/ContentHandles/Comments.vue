@@ -16,10 +16,13 @@
             </div>
         </div>
       </div>
-      <button class="button button--black">
-          <img src="@/assets/icons/pen.svg">
-          Comment
-      </button>
+      <div class="post-comment">
+        <input type="text">
+        <button class="button button--black">
+            <img src="@/assets/icons/pen.svg">
+            Post
+        </button>
+      </div>
   </div>
 </template>
 
@@ -40,17 +43,19 @@ export default defineComponent({
 
 .comments{
     width: 100%;
+    height: 100% auto;
     box-sizing: border-box;
-    padding: 0 0 0 20px;
+    margin-top: 60px;
 }
 
 .comment-list{
-    max-height: 300px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
 .comment-list::-webkit-scrollbar {
   width: 10px;
+  transition: all 0.5s;
 }
 
 .comment-list::-webkit-scrollbar-track {
@@ -58,13 +63,13 @@ export default defineComponent({
 }
 
 .comment-list::-webkit-scrollbar-thumb {
-  background: #9b9b9b;
-  border-radius: 50vw;
+  background: #181818;
+  border-radius: 10px;
   border: 3px solid $white;
 }
 
 .comment-list::-webkit-scrollbar-thumb:hover {
-  background: $black;
+  background: #4d4d4d;
 }
 
 .comments-info{
@@ -72,21 +77,20 @@ export default defineComponent({
     flex-direction: row;
     align-items: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid $line;
     span{
         color: $black;
         margin-left: 10px;
     }
     img{
-        width: 20px;
+        width: 15px;
     }
 }
 
 button{
-  margin-top: 25px;
-  img{
-      margin-bottom: 2px;
-  }
+    img{
+        margin: 0 0 1px -5px;
+        width: 10px;
+    }
 }
 
 .comment{
@@ -107,7 +111,7 @@ button{
     align-items: center;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 15px;
     img{
         width: 18px;
         margin-left: 10px;
@@ -119,5 +123,35 @@ button{
 
 .avatar-cont--small{
     margin-right: $avatar-margin;
+}
+
+// Post comment
+.post-comment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+    margin-top: 25px;
+    input{
+        height: 40px;
+        margin-right: 10px;
+        padding: 0 20px;
+        border: 1px solid #b6b6b6;
+        background-color: $lightgray;
+        border-radius: 4px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    input:focus{
+        border-color: $link;
+        outline: 0 none;
+    }
+}
+
+@media(max-width: 1100px) {
+    .comments{
+        padding: 0;
+    }
 }
 </style>
