@@ -51,6 +51,7 @@ export default defineComponent({
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
     .tag{
       margin-right: 10px;
       color: $link;
@@ -64,11 +65,13 @@ export default defineComponent({
 
 .tags-comments-column{
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 
 .desc{
-    margin: 20px 0;
+    margin-top: 20px;
 }
 
 .author-info{

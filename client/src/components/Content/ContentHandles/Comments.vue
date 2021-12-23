@@ -51,6 +51,7 @@ export default defineComponent({
 .comment-list{
     max-height: 200px;
     overflow-y: auto;
+    position: relative;
 }
 
 .comment-list::-webkit-scrollbar {
@@ -76,7 +77,7 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
     span{
         color: $black;
         margin-left: 10px;
@@ -96,7 +97,7 @@ button{
 .comment{
     display: flex;
     flex-direction: row;
-    margin-top: 15px;
+    margin-bottom: 15px;
     position: relative;
     p{
         max-width: 300px;
@@ -131,7 +132,7 @@ button{
     flex-direction: row;
     align-items: center;
     height: auto;
-    margin-top: 25px;
+    margin-top: 20px;
     input{
         height: 40px;
         margin-right: 10px;
