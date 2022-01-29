@@ -1,7 +1,7 @@
-![](https://img.shields.io/badge/Status-In%20development-navy)
-![](https://img.shields.io/badge/License-MIT-%23f3e3ff)
+![License: MIT](https://img.shields.io/badge/License-MIT-%23E6F0FD)
+![Status: In development](https://img.shields.io/badge/Status-Early%20development-%23f7e9e6)
 
-# Instagram Clone
+# Instagram clone
 
 This project is a full-stack application made with Django and Vue that imitates Instagram. It allows people to post messages and stories, follow users, write comments and "like" content. This repository contains all the code needed right with the instructions on how to use it as well as explanations for different parts of it.
 
