@@ -2,7 +2,9 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import LogIn from "../views/LogIn.vue";
 import { useStore } from "../store/index"
-import { ActionTypes } from '../store/actions'
+import { ActionTypes } from "../store/actions";
+import { use } from "chai";
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -33,14 +35,17 @@ const router = createRouter({
 
 // Creating a route guard to redirect if a user is not logged in
 const store = useStore();
-store.dispatch(ActionTypes.UpdateUser)
-const user = store.getters.user_data;
-const isAuthenticated = (user == null) ? false : true;
 
-router.beforeEach((to, from, next) => {
-    if (to.name !== 'LogIn' && !isAuthenticated) next({ name: 'LogIn' })
-    else if(to.name == 'LogIn' && isAuthenticated) next({ name: 'Home' })
-    else next();
-})
+// Update the user
+async function isAuthenticated(){
+  const user = await store.dispatch(ActionTypes.UpdateUser);
+  return (user == null) ? false : true;
+}
+
+router.beforeEach(async (to, from, next) => {
+  if (to.name !== 'LogIn' && !(await isAuthenticated())) next({ name: 'LogIn' })
+  else if(to.name == 'LogIn' && (await isAuthenticated())) next({ name: 'Home' })
+  else next();
+});
 
 export default router;

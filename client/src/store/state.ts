@@ -57,7 +57,7 @@ export const state: State = {
     feed: [{
         user: {
             user: 39,
-            username: 'user3',
+            username: 'cosmokr',
             followers: [],
             following: [],
             bio: '',
@@ -74,8 +74,8 @@ export const state: State = {
                 created: '22/22/2222',
                 avatar: null
             },
-            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
-            likes: 22,
+            content: 'Cosmo really hit us hard this time, perfect choice for a new years cover. Love you Sana!',
+            likes: 41,
             id: '012'
         },
         {
@@ -88,8 +88,8 @@ export const state: State = {
                 created: '22/22/2222',
                 avatar: null
             },
-            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
-            likes: 22,
+            content: 'The purple fits you so well!! Cannot wait to see more omg! I should get the same hair color..',
+            likes: 20,
             id: '012'
         },
         {
@@ -102,8 +102,8 @@ export const state: State = {
                 created: '22/22/2222',
                 avatar: null
             },
-            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
-            likes: 22,
+            content: 'You look lovely in this.. and with cosmo??? You are killing it.. that is it. Please do one with Jihyo in spring, she would fit so well!',
+            likes: 32,
             id: '012'
         },
         {
@@ -116,18 +116,18 @@ export const state: State = {
                 created: '22/22/2222',
                 avatar: null
             },
-            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
+            content: 'This is super cute!',
             likes: 22,
             id: '012'
         }],
-        image: 'https://1409791524.rsc.cdn77.org/data/images/full/597353/twice-sana-exudes-classy-visuals-on-cosmopolitan-korea-photoshoot.jpg?w=600?w=430',
+        image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
         tags: ['coolbeach', 'ilikethesun'],
-        desc: 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff! Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
-        id: '032'
+        desc: 'Celebrate New Years Eve with Cosmopolitan and beautiful Sana from Twice! We are ready to put all the glitter on, are you?',
+        id: '032',
     }, {
         user: {
             user: 39,
-            username: 'user3',
+            username: 'karina00',
             followers: [],
             following: [],
             bio: '',
@@ -144,13 +144,13 @@ export const state: State = {
                 created: '22/22/2222',
                 avatar: null
             },
-            content: 'Some random comment. Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
-            likes: 22,
+            content: 'Better than ever before, period.',
+            likes: 120,
             id: '012'
         }],
-        image: 'https://images.unsplash.com/photo-15793371862546556456',
-        tags: ['coolbeach', 'ilikethesun'],
-        desc: 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff!',
+        image: 'https://1409791524.rsc.cdn77.org/data/images/full/591301/aespa-giselle.jpg',
+        tags: ['staycute'],
+        desc: 'Just summer.',
         id: '032'
     },]
 }

@@ -1,6 +1,8 @@
 import { ActionContext, ActionTree } from 'vuex'
 import { Mutations, MutationTypes } from './mutations'
-import { State } from './state'
+import { State, User } from './state'
+import axios from 'axios';
+
 
 // This module allows you to create actions, actions are similar to mutations but they,
 // instead of mutating the state, commit the mutations and can contain arbitrary
@@ -23,15 +25,15 @@ export type Actions = {
 
 export const actions: ActionTree<State, State> & Actions = {
     async [ActionTypes.UpdateUser]({ commit }){
-        const user = {
-            "user": 1,
-            "followers": [],
-            "following": [],
-            "username": 'testuser',
-            "bio": 'Have you ever seen a sunset that beautiful? And with rockets in the background? Wild stuff! Law student from NYC.',
-            "created": '22/22/1000',
-            "avatar": null
-        }
+        const user = await axios.get('/api/profiles/me')
+        .then((res) => {
+            return res.data;
+        })
+        .catch(() => {
+            return null;
+        });
+        
         commit(MutationTypes.UpdateUser, user);
+        return user;
     }
 }
