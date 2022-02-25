@@ -2,7 +2,7 @@
   <div class="login">
       <img src="@/assets/icons/ig-black.svg" class="insta-logo login-icon">
       <div class="login-box">
-          <h1>Instagram.</h1>
+          <h1>Instagram</h1>
           <span class="small-text">Make the time stop, take the image.</span>
           <button class="login-option login-option--google">
               <img src="@/assets/icons/google.svg" class="sm-icon">
@@ -31,6 +31,7 @@
     align-items: center;
     box-sizing: border-box;
     padding: 60px;
+    box-shadow: 0 50px 90px rgba(0, 0, 0, 0.048);
 }
 
 // The main container
@@ -41,11 +42,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('../assets/media/bg2.jpg');
+    background-size: 100%;
+    background-position: bottom left;
 }
 
 // Instagram logo in white
 .login-icon{
-    transform: translateY(-30px);    
+    margin-bottom: 25px;
+    filter: brightness(4);
 }
 
 // Font settings
@@ -70,7 +75,7 @@ h1{
     margin: 10px 0;
     font-size: 0.93em;
     position: relative;
-    transition: background-color 0.15s;
+    transition: background-color 0.1s;
 }
 
 .login-option--google{
@@ -84,7 +89,7 @@ h1{
 
 .login-option--test{
     background-color: $lightgray;
-    transition: color 0.6s 0.5s;
+    transition: all 0.2s;
 }
 
 .login-option:nth-of-type(1){
@@ -97,6 +102,7 @@ h1{
     position: absolute;
     left: 0;
     margin-left: 20px;
+    transform: translateY(-4px);
 }
 
 // Add hover animation
@@ -109,32 +115,6 @@ h1{
 }
 
 .login-option--test:hover{
-    color: transparent;
-}
-
-.login-option--test:hover::before{
-    opacity: 100;
-    color: rgb(255, 255, 255);
-}
-
-// Funsies
-.login-option--test::before{
-    content:"Let's begin";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: none;
-    border-radius: $radius--btn;
-    opacity: 0;
-    transition: opacity 0.5s, background-color 0.5s 0.5s, color 0.6s 0.5s ease-in-out;
-    background: linear-gradient(240deg, #FF0000 -26.06%, #6742FB 51.71%, #FFCD9E 103.78%);;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgba(255, 255, 255, 0);
-    box-sizing: border-box;
-    padding-top: 0.3em;
+    background-color: darken(#f3f3f3, 5%);
 }
 </style>

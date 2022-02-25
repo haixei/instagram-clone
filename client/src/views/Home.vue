@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home padding-view">
     <StoryList></StoryList>
     <imagePost v-for="post in feed" :key="post.id" :post="post"></imagePost>
   </div>

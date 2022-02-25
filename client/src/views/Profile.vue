@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile padding-view">
     <div class="error" v-if="user == null">
       <img src="@/assets/icons/warning.svg">
       <span>User of this username does not exist.</span>
@@ -20,8 +20,10 @@
             <span class="following">{{ user.following.length }}<span class="following__type">Following</span></span>
             <span class="following">{{ user.following.length }}<span class="following__type">Followers</span></span>
           </div>
-          <button class="button button--lined" v-on:click="followUser" v-if="state.isFollowed == false">Follow</button>
-          <button class="button button--black" v-on:click="unfollowUser" v-else>Unfollow</button>
+          <div v-if="username" class="button-wrapper">
+            <button class="button button--lined" v-on:click="followUser" v-if="state.isFollowed == false">Follow</button>
+            <button class="button button--black" v-on:click="unfollowUser" v-else>Unfollow</button>
+          </div>
         </div>
       </div>
       <p class="no-posts" v-if="user_feed.length == 0">This user did not post anything yet.</p>
@@ -35,6 +37,7 @@ import Avatar from "../components/User/Avatar.vue";
 import { useStore } from "../store/index";
 import { useRoute } from "vue-router";
 import { ImagePost } from "../store/state";
+import { computed } from 'vue'
 
 export default defineComponent({
   name: "Home",
@@ -52,14 +55,14 @@ export default defineComponent({
     // If username not specified, get current user, if user is not logged in, they
     // will be automatically redirected to the login page because of the rotue guardian
     // that is set up in routes/index.ts
-    let user = null;
     let user_feed: Array<ImagePost> = [];
+    let user = null;
 
     if(!username){
-      user = store.getters.user_data;
       // The feed will be loaded from the API if the user is logged in,
       // if not, the user doesnt exist error will appear
       // (...)
+      user = store.getters.user_data;
     }else{
       // If the username exists, load their page using the API
       // (...)
@@ -75,7 +78,7 @@ export default defineComponent({
       state.isFollowed = false;
     }
 
-    return { user, user_feed, state, followUser, unfollowUser }
+    return { user, user_feed, state, followUser, unfollowUser, username }
   }
 });
 </script>
@@ -110,8 +113,8 @@ export default defineComponent({
   justify-content: space-between;
 }
 
-.following-cont{
-  margin-right: 20px;
+.button-wrapper{
+  margin-left: 20px;
 }
 
 .about-content{

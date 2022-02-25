@@ -10,8 +10,8 @@
               <a href="">@{{ post.user.username }}</a>
           </div>
           <p class="desc">{{ post.desc }}</p>
-          <div class="tag-box">
-            <a class="tag" v-for="tag in post.tags" :key="tag">#{{ tag }}</a>
+          <div class="tag-box" v-if="post.tags.length > 0">
+            <a class="tag" v-for="tag in post.tags" :key="tag"><span>#</span>{{ tag }}</a>
           </div>
       </div>
       <Comments :comments="post.comments"></Comments>
@@ -42,7 +42,7 @@ export default defineComponent({
 .image-post{
   margin-top: 70px;
   display: flex;
-  flex-direction: row;
+  flex-direction: row;transform: translateY(2px);
   align-items: flex-start;
   justify-content: space-between;
 }
@@ -52,21 +52,14 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
-    .tag{
-      margin-right: 10px;
-      color: $link;
-      line-height: 1.6em;
-      font-size: 0.88em;
-      padding: 3px 20px;
-      border-radius: 50vw;
-      background-color: #e3e3f1;
-    }
 }
 
 .tags-comments-column{
   width: 100%;
+  height: 550px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 
@@ -89,6 +82,7 @@ export default defineComponent({
     margin-right: $avatar-margin;
 }
 
+
 @media(max-width: 1100px) {
     .image-post{
         width: 450px;
@@ -99,5 +93,4 @@ export default defineComponent({
       margin-top: 20px;
     }
 }
-
 </style>

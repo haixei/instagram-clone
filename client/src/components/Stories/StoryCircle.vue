@@ -51,8 +51,9 @@ export default defineComponent({
     background-color: transparent;
     cursor: pointer;
     margin-right: 15px;
-    border: 3px solid $main;
+    border: 1px solid $link;
     transition: all 0.5s;
+    padding: 2px;
 }
 
 .read{

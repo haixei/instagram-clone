@@ -19,3 +19,15 @@ export default defineComponent({
   }
 });
 </script>
+<style lang="scss" scoped>
+footer{
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  p{
+    color: #a1a1a1;
+  }
+}
+</style>

@@ -84,7 +84,7 @@ export default defineComponent({
     align-items: center;
     border-bottom: 1px solid $line;
     height: auto;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .section-header{

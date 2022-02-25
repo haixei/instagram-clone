@@ -1,5 +1,5 @@
 <template>
-    <div class="story-content">
+    <div class="story-content dark-bg">
         <div class="image">
             <img src="@/assets/icons/arrow.svg" alt="backwards" class="arrow" @click="changeImage(-1)">
             <img src="@/assets/icons/arrow.svg" alt="forward" class="arrow" @click="changeImage(1)">
@@ -92,7 +92,6 @@ export default defineComponent({
 .story-content{
     width: 100%;
     height: 100vh;
-    background-color: #2c2c2c5d;
     position: fixed;
     top:0;
     left: 0;

@@ -38,7 +38,7 @@ export default defineComponent({
 }
 
 .img-box{
-    height: 600px;
+    height: 550px;
     display: flex;
     align-items: center;
     justify-content: center;

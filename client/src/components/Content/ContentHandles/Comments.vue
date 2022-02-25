@@ -64,13 +64,13 @@ export default defineComponent({
 }
 
 .comment-list::-webkit-scrollbar-thumb {
-  background: #181818;
+  background: #b3b3b3;
   border-radius: 10px;
   border: 3px solid $white;
 }
 
 .comment-list::-webkit-scrollbar-thumb:hover {
-  background: #4d4d4d;
+    background: #9e9e9e;
 }
 
 .comments-info{
@@ -83,7 +83,7 @@ export default defineComponent({
         margin-left: 10px;
     }
     img{
-        width: 15px;
+        width: 19px;
     }
 }
 
@@ -97,13 +97,17 @@ button{
 .comment{
     display: flex;
     flex-direction: row;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     position: relative;
     p{
         max-width: 300px;
         width: 70%;
         margin: 0;
     }
+}
+
+.comment:last-of-type{
+    margin-bottom: 0;
 }
 
 .likes{
@@ -114,11 +118,14 @@ button{
     top: 0;
     right: 15px;
     img{
-        width: 18px;
+        width: 15px;
         margin-left: 10px;
     }
     span{
-        margin-top: 5px;
+        font-size: 0.9em;
+        margin-top: 3px;
+        color: #ff4f4f;
+        font-family: 'HalveticaMed', sans-serif;
     }
 }
 
@@ -141,8 +148,6 @@ button{
         background-color: $lightgray;
         border-radius: 4px;
         box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
     }
     input:focus{
         border-color: $link;
