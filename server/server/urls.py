@@ -26,8 +26,6 @@ urlpatterns = [
             PostedImageView.as_view({'get': 'get_feed_from_hashtag'})),
     re_path(r'^api/profiles/username/(?P<username>.+)$',
             ProfilePublicView.as_view({'get': 'get_by_username'})),
-    re_path(r'^api/stories/username/(?P<username>.+)$',
-            UserStoryView.as_view({'get': 'get_by_username'})),
 
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),

@@ -1,14 +1,11 @@
 import json
 import tempfile
-
-import django.test.client
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.urls import reverse
-from requests import Session
-
 from instagram.models import *
 
+
+# Set up common variables
 username = 'testusername'
 password = 'testpass123'
 
@@ -23,6 +20,11 @@ class ProfileTestCase(TestCase):
         cls.user_2 = get_user_model().objects.create_user(username=username + '2', password=password,
                                                           email='whatever2@me.com')
         cls.patch_data = {'username': 'changedusername'}
+
+    def test_profile_authorized(self):
+        self.client.login(username=username, password=password)
+        response = self.client.get('/api/profiles/me/', follow=True)
+        self.assertEqual(response.status_code, 200)
 
     def test_profile_access_public(self):
         # Anyone should be able to get a profile by the username

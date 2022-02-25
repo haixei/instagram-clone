@@ -1,14 +1,14 @@
 # Custom schema support
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets
 from .customviewsets import UpdateDestroyViewSet, DestroyCreateViewSet, NoListViewSet
 from .permissions import *
 from rest_framework.response import Response
 from .models import Profile, Comment, PostedImage, UserStory
-from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer, ProfilePublicSerializer
 from django.contrib.sessions.models import Session
 from rest_framework.decorators import action
 from .custommixins import CreateAuthorization
+from .serializers import ProfileSerializer, CommentSerializer, PostedImageSerializer, UserStorySerializer,\
+                         ProfilePublicSerializer
 
 
 class ProfilePublicView(UpdateDestroyViewSet):
@@ -53,6 +53,21 @@ class ProfilePublicView(UpdateDestroyViewSet):
         else:
             serializer = ProfileSerializer(requested_user)
             return Response(serializer.data)
+
+    # Return the data of the session user if it exists
+    @action(detail=False, methods=['GET'], name='me')
+    def me(self, request):
+        if request.session.session_key is not None:
+            session = Session.objects.get(session_key=request.session.session_key)
+            session_data = session.get_decoded()
+            uid = session_data.get('_auth_user_id')
+
+            # Get the user
+            authorized_user = Profile.objects.get(user_id=uid)
+            serializer = ProfileSerializer(authorized_user)
+            return Response(serializer.data)
+        else:
+            return Response(status=401)
 
 
 class CommentView(NoListViewSet):
