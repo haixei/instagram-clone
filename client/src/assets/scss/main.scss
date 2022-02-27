@@ -123,9 +123,9 @@ input:focus, textarea:focus{
 
 .button--main{
     color: $lightgray;
-    background-size: 100% auto!important;
+    background-size: 110% auto!important;
     background: linear-gradient(240deg, #ffb88f -16.06%, #121d80 50.71%, #ceb4ff  103.78%);
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .button--main:hover{
