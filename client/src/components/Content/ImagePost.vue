@@ -1,6 +1,6 @@
 <template>
   <div class="image-post">
-    <Image :image="post.image" :user="post.user.username" :desc="post.desc"></Image>
+    <Image :image="post.image" :liked="liked" :stateChanged="stateChanged" v-on:dblclick="changeLikeState"></Image>
     <div class="tags-comments-column">
       <div class="info">
           <div class="author-info">
@@ -14,13 +14,26 @@
             <a class="tag" v-for="tag in post.tags" :key="tag"><span>#</span>{{ tag }}</a>
           </div>
       </div>
-      <Comments :comments="post.comments"></Comments>
+      <div class="user-interactions">
+        <div class="interactions-count">
+          <div class="interaction-info">
+            <img src="@/assets/icons/comment.svg">
+            <span>22</span>
+          </div>
+          <div class="interaction-info like" @click="changeLikeState">
+            <img src="@/assets/icons/heart-outlined.svg" class="post-likes" v-if="!liked">
+            <img src="@/assets/icons/heart.svg" class="post-likes" v-if="liked">
+            <span>22</span>
+          </div>
+        </div>
+        <Comments :comments="post.comments"></Comments>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import Image from "./ContentHandles/Image.vue"
 import Comments from "./ContentHandles/Comments.vue"
 import Avatar from "../User/Avatar.vue"
@@ -32,6 +45,24 @@ export default defineComponent({
     Image,
     Comments,
     Avatar
+  },
+  setup(){
+    let liked = ref(false)
+    let stateChanged = ref(false);
+
+    function changeLikeState(){
+      liked.value = !liked.value;
+    }
+
+    watch(liked, (value) => {
+      // Run a like animation
+      console.log(value);
+      stateChanged.value = true;
+      // If person changes the state of the like (likes/unlikes), 
+      // make a call to the API to change the value in the db
+    })
+
+    return { liked, stateChanged, changeLikeState }
   }
 })
 </script>
@@ -82,6 +113,38 @@ export default defineComponent({
     margin-right: $avatar-margin;
 }
 
+
+.interactions-count{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.interaction-info{
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    span{
+        color: $black;
+        margin-left: 10px;
+        font-size: 0.9rem;
+    }
+    img{
+        width: 19px;
+        opacity: 0.9;
+    }
+    .post-likes{
+        width: 20px;
+        margin-bottom: 1px;
+    }
+}
+
+.like{
+  cursor: pointer;
+}
 
 @media(max-width: 1100px) {
     .image-post{

@@ -1,9 +1,5 @@
 <template>
   <div class="comments">
-      <div class="comments-info">
-          <img src="@/assets/icons/comment.svg">
-          <span>{{ comments.length }}</span>
-      </div>
       <div class="comment-list">
           <div class="comment" v-for="comment in comments" :key="comment.id">
             <div class="avatar-cont--small">
@@ -27,12 +23,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 import Avatar from "../../User/Avatar.vue"
 
 export default defineComponent({
   name: "Comments",
-  props: ["comments"],
+  props: ["comments", "liked"],
   components: {
       Avatar
   }
@@ -45,7 +41,6 @@ export default defineComponent({
     width: 100%;
     height: 100% auto;
     box-sizing: border-box;
-    margin-top: 60px;
 }
 
 .comment-list{
@@ -71,20 +66,6 @@ export default defineComponent({
 
 .comment-list::-webkit-scrollbar-thumb:hover {
     background: #9e9e9e;
-}
-
-.comments-info{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
-    span{
-        color: $black;
-        margin-left: 10px;
-    }
-    img{
-        width: 19px;
-    }
 }
 
 button{
