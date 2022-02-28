@@ -29,7 +29,8 @@ export interface ImagePost {
     image: string,
     tags: Array<string> | null,
     desc: string,
-    id: string
+    id: string,
+    likes: number
 }
 
 export type State = {
@@ -124,6 +125,7 @@ export const state: State = {
         tags: ['coolbeach', 'ilikethesun'],
         desc: 'Celebrate New Years Eve with Cosmopolitan and beautiful Sana from Twice! We are ready to put all the glitter on, are you?',
         id: '032',
+        likes: 24
     }, {
         user: {
             user: 39,
@@ -151,6 +153,7 @@ export const state: State = {
         image: 'https://1409791524.rsc.cdn77.org/data/images/full/591301/aespa-giselle.jpg',
         tags: ['staycute'],
         desc: 'Just summer.',
-        id: '032'
+        id: '032',
+        likes: 4502
     },]
 }

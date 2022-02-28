@@ -20,11 +20,7 @@
             <img src="@/assets/icons/comment.svg">
             <span>22</span>
           </div>
-          <div class="interaction-info like" @click="changeLikeState">
-            <img src="@/assets/icons/heart-outlined.svg" class="post-likes" v-if="!liked">
-            <img src="@/assets/icons/heart.svg" class="post-likes" v-if="liked">
-            <span>22</span>
-          </div>
+          <Like :liked="liked" :likes="post.likes" class="interaction-info" @click="changeLikeState"></Like>
         </div>
         <Comments :comments="post.comments"></Comments>
       </div>
@@ -34,9 +30,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-import Image from "./ContentHandles/Image.vue"
-import Comments from "./ContentHandles/Comments.vue"
-import Avatar from "../User/Avatar.vue"
+import Image from "./ContentHandles/Image.vue";
+import Comments from "./ContentBlocks/Comment.vue";
+import Avatar from "../User/Avatar.vue";
+import Like from "./ContentBlocks/Like.vue";
 
 export default defineComponent({
   name: "ImagePost",
@@ -44,7 +41,8 @@ export default defineComponent({
   components: {
     Image,
     Comments,
-    Avatar
+    Avatar,
+    Like
   },
   setup(){
     let liked = ref(false)
@@ -136,14 +134,6 @@ export default defineComponent({
         width: 19px;
         opacity: 0.9;
     }
-    .post-likes{
-        width: 20px;
-        margin-bottom: 1px;
-    }
-}
-
-.like{
-  cursor: pointer;
 }
 
 @media(max-width: 1100px) {

@@ -1,16 +1,7 @@
 <template>
   <div class="comments">
       <div class="comment-list">
-          <div class="comment" v-for="comment in comments" :key="comment.id">
-            <div class="avatar-cont--small">
-                <Avatar :user="comment.user"></Avatar>
-            </div>
-            <p>{{ comment.content }}</p>
-            <div class="likes">
-                <span>{{ comment.likes }}</span>
-                <img src="@/assets/icons/heart.svg">
-            </div>
-        </div>
+         <Comment v-for="comment in comments" :key="comment.id" :comment="comment"></Comment>
       </div>
       <div class="post-comment">
         <input type="text">
@@ -24,13 +15,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Avatar from "../../User/Avatar.vue"
+import Comment from "../ContentHandles/CommentList.vue"
 
 export default defineComponent({
   name: "Comments",
   props: ["comments", "liked"],
   components: {
-      Avatar
+      Comment
   }
 })
 </script>
@@ -73,45 +64,6 @@ button{
         margin: 0 0 1px -5px;
         width: 10px;
     }
-}
-
-.comment{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 25px;
-    position: relative;
-    p{
-        max-width: 300px;
-        width: 70%;
-        margin: 0;
-    }
-}
-
-.comment:last-of-type{
-    margin-bottom: 0;
-}
-
-.likes{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    right: 15px;
-    img{
-        width: 15px;
-        margin-left: 10px;
-    }
-    span{
-        font-size: 0.9em;
-        margin-top: 3px;
-        color: #ff4f4f;
-        font-family: 'HalveticaMed', sans-serif;
-    }
-}
-
-.avatar-cont--small{
-    margin-right: $avatar-margin;
 }
 
 // Post comment
